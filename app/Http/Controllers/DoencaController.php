@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class DoencaController extends Controller
 {
@@ -13,7 +14,7 @@ class DoencaController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -23,7 +24,7 @@ class DoencaController extends Controller
      */
     public function create()
     {
-        //
+        return view('Conteudo');
     }
 
     /**
@@ -34,7 +35,19 @@ class DoencaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $response = Http::post( 'localhost:3001/api/disease/', [
+            'name' => $request->name,
+            'etiologicalAgent' =>  $request->etiologicalAgent,
+            'scientificName' =>  $request->scientificName,
+            'vector' =>  $request->vector,
+            'lifeCycle' =>  $request->lifeCycle,
+            'transmission' =>  $request->transmission,
+            'clinicalManifestation' =>  $request->clinicalManifestation,
+            'complications' =>  $request->complications,
+            'distribution' =>  $request->distribution,
+            'states' =>  $request->states,
+        ]);
+        return redirect('/doencas');
     }
 
     /**
