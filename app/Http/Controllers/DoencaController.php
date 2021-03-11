@@ -13,8 +13,10 @@ class DoencaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        
+    {   
+        $servidor = 'http://localhost:3001/api/disease';
+        $doencas = Http::get($servidor)->json();
+        return view('doencas.list', ['doencas'=>$doencas]);        
     }
 
     /**
@@ -24,7 +26,7 @@ class DoencaController extends Controller
      */
     public function create()
     {
-        return view('Conteudo');
+        return view('doencas.Conteudo');
     }
 
     /**
@@ -92,6 +94,10 @@ class DoencaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $servidor = 'http://localhost:3001/api/disease';
+        $endereco = '$servidor';
+        $endereco = $endereco .  '$id';
+        $deletar = Http::delete('$endereco');
+        return redirect('/doencas');
     }
 }

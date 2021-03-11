@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtigoController;
-use App\Http\Controllers\TelaPrincipalController;
+use App\Http\Controllers\DoencaController;
 
 
 /*
@@ -17,7 +17,7 @@ use App\Http\Controllers\TelaPrincipalController;
 */
 
 //Rota para a tela inicial
-Route::get('/', TelaPrincipalController::class)->name('index');
+Route::view('/', 'principal/index')->name('index');
 
 //Rotas de artigos
 Route::get('/artigos', [ArtigoController::class, 'index'])->name('artigos.index');
@@ -31,8 +31,6 @@ Route::put('/artigos/{id}/edit', [ArtigoController::class, 'update'])->name('art
 Route::get('/artigos/{id}', [ArtigoController::class, 'destroy'])->name('artigos.destroy');
 
 //Rotas de doenças
-Route::get('/doencas/create','DoencaController@create');
-Route::post('/doencas/create','DoencaController@store')->name('registrar');
-
-});
-
+Route::get('/doencas',[DoencaController::class, 'index'])->name('doencas.index');
+Route::get('/doencas/create',[DoencaController::class, 'create']);
+Route::post('/doencas/create',[DoencaController::class, 'store'])->name('registrar');
