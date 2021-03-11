@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArtigoController;
+use App\Http\Controllers\TelaPrincipalController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +16,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('doencas');
-});
+//Rota para a tela inicial
+Route::get('/', TelaPrincipalController::class)->name('index');
 
-Route::get('/doencas/create', 'DoencaController@create')->name('doencas.create');
-Route::post('/doencas/create', 'DoencaController@store')->name('doencas.store');
-Route::get('/doencas', 'DoencaController@index')->name('doencas.index');
-Route::get('/doencas/{id}', 'DoencaController@destroy')->name('doencas.destroy');
+//Rotas de artigos
+Route::get('/artigos', [ArtigoController::class, 'index'])->name('artigos.index');
+
+Route::get('/artigos/create', [ArtigoController::class, 'create'])->name('artigos.create');
+Route::post('/artigos/create', [ArtigoController::class, 'store'])->name('artigos.store');
+
+Route::get('/artigos/{id}/edit', [ArtigoController::class, 'edit'])->name('artigos.edit');
+Route::put('/artigos/{id}/edit', [ArtigoController::class, 'update'])->name('artigos.update');
+
+Route::get('/artigos/{id}', [ArtigoController::class, 'destroy'])->name('artigos.destroy');
+
+//Rotas de doenças
+Route::get('/doencas/create','DoencaController@create');
+Route::post('/doencas/create','DoencaController@store')->name('registrar');

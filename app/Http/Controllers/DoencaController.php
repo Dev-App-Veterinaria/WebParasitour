@@ -16,7 +16,7 @@ class DoencaController extends Controller
     {   
         $servidor = 'http://localhost:3001/api/disease';
         $doencas = Http::get($servidor)->json();
-        return view('doencas.list', ['doencas'=>$doencas]);
+        return view('doencas.list', ['doencas'=>$doencas]);        
     }
 
     /**
@@ -26,7 +26,7 @@ class DoencaController extends Controller
      */
     public function create()
     {
-        return view('doencas');
+        return view('Conteudo');
     }
 
     /**
@@ -37,9 +37,19 @@ class DoencaController extends Controller
      */
     public function store(Request $request)
     {
-        //dd{$request}
-        dd($request->getContent());
-        dd($request->all());
+        $response = Http::post( 'localhost:3001/api/disease/', [
+            'name' => $request->name,
+            'etiologicalAgent' =>  $request->etiologicalAgent,
+            'scientificName' =>  $request->scientificName,
+            'vector' =>  $request->vector,
+            'lifeCycle' =>  $request->lifeCycle,
+            'transmission' =>  $request->transmission,
+            'clinicalManifestation' =>  $request->clinicalManifestation,
+            'complications' =>  $request->complications,
+            'distribution' =>  $request->distribution,
+            'states' =>  $request->states,
+        ]);
+        return redirect('/doencas');
     }
 
     /**
