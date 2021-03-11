@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class DoencaController extends Controller
 {
@@ -12,8 +13,10 @@ class DoencaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        $servidor = 'http://localhost:3001/api/disease';
+        $doencas = Http::get($servidor)->json();
+        return view('doencas.list', ['doencas'=>$doencas]);
     }
 
     /**
@@ -23,7 +26,7 @@ class DoencaController extends Controller
      */
     public function create()
     {
-        //
+        return view('doencas');
     }
 
     /**
@@ -34,7 +37,9 @@ class DoencaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd{$request}
+        dd($request->getContent());
+        dd($request->all());
     }
 
     /**
@@ -79,6 +84,10 @@ class DoencaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $servidor = 'http://localhost:3001/api/disease';
+        $endereco = '$servidor';
+        $endereco = $endereco .  '$id';
+        $deletar = Http::delete('$endereco');
+        return redirect('/doencas');
     }
 }

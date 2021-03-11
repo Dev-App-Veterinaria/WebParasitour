@@ -14,5 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('doencas');
 });
+
+Route::get('/doencas/create', 'DoencaController@create')->name('doencas.create');
+Route::post('/doencas/create', 'DoencaController@store')->name('doencas.store');
+Route::get('/doencas', 'DoencaController@index')->name('doencas.index');
+Route::get('/doencas/{id}', 'DoencaController@destroy')->name('doencas.destroy');
