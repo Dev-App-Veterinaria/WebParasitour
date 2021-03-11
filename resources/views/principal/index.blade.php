@@ -3,6 +3,8 @@
 @section('conteudo')
     <div class="jumbotron text-center">
         <h1>Parasitour</h1>
-        <h4>Sistema voltado a apuração de valores inerentes às contas do <br>Programa de Formação do Patrimônio do Servidor Público - PASEP.</h4>
+        <h4>Sistema para o gerenciamento do app</h4>
+        <p><a href="/artigos">Artigos</a><p>
+        <p><a href="/doencas">Doenças</a><p>
     </div>
 @endsection

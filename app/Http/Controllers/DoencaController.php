@@ -26,7 +26,7 @@ class DoencaController extends Controller
      */
     public function create()
     {
-        return view('Conteudo');
+        return view('doencas.Conteudo');
     }
 
     /**
