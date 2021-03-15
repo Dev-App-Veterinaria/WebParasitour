@@ -173,6 +173,19 @@
                     </div>
                 </div>
             </form>
+
+            <script type="text/javascript">
+                let estadosRecebidos =  `<?php isset($artigo) ?
+                    $estados = implode(',' , $artigo['state']) : $estados = ''; echo $estados;?>`;
+                if(estadosRecebidos != ''){
+                    let estados = document.getElementsByName('estados[]');
+                    for(let i = 0; i< estados.length; i++){
+                        if(estadosRecebidos.includes(estados[i].value)){
+                            estados[i].checked = true;
+                        }
+                    }
+                }
+            </script>
     </div>
 
 @endsection
