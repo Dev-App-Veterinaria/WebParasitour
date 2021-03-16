@@ -1,4 +1,4 @@
-@extends('templates.template')
+@extends('template.template')
 
 @section('conteudo')
 <div class="jumbotron text-center">
@@ -42,7 +42,7 @@
     </a>
 </div>
 <!-- Pop-up para confirmação de exclusão -->
-<div class="modal fade" id="excluirPopUp" role="dialog">
+<div class="modal" id="excluirPopUp" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -64,6 +64,7 @@
 <!-- Script em JS que passa o rapâmetr para o modal -->
 <script type="text/javascript">
     $('#excluirPopUp').on('show.bs.modal', function(event) {
+        dd("aqui")
         var button = $(event.relatedTarget) // Botão que acionou o modal
         var recipient = button.data('id') // Extrai informação do atributos data-*
         var modal = $(this)

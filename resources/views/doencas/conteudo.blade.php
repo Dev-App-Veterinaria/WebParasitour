@@ -1,4 +1,4 @@
-@extends('templates.template')
+@extends('template.template')
 
 @section('conteudo')
 <div class="jumbotron text-center">

@@ -33,7 +33,7 @@ Route::get('/artigos/{id}', [ArtigoController::class, 'destroy'])->name('artigos
 //Rotas de doenças
 Route::get('/doencas',[DoencaController::class, 'index'])->name('doencas.index');
 
-Route::get('/doencas/create',[DoencaController::class, 'create']);
+Route::get('/doencas/create',[DoencaController::class, 'create'])->name('doencas.create');
 Route::post('/doencas/create',[DoencaController::class, 'store'])->name('doencas.store');
 
 Route::get('/doencas/{id}/edit', [DoencaController::class, 'edit'])->name('doencas.edit');

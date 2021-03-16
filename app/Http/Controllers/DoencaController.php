@@ -27,7 +27,7 @@ class DoencaController extends Controller
 
         $doencas = Http::get($this->server)->json();
 
-        return view('doencas.list', ['doencas'=>$doencas]);        
+        return view('doencas.index', ['doencas'=>$doencas]);        
     }
 
     /**
