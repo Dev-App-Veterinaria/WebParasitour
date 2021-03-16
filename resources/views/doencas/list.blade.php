@@ -21,7 +21,7 @@
                 <td>{{$doenca['etiologicalAgent']}}</td>
                 <td>{{$doenca['transmission']}}</td>
                 <td>
-                    <a href="{{url('doenca/'.$doenca['_id'].'/edit')}}" style="text-decoration:none">
+                    <a href="{{url('doencas/'.$doenca['_id'].'/edit')}}" style="text-decoration:none">
                         <button type="button" class="btn btn-primary">Editar</button>
                     </a>
                 </td>
@@ -67,7 +67,7 @@
         var button = $(event.relatedTarget) // Botão que acionou o modal
         var recipient = button.data('id') // Extrai informação do atributos data-*
         var modal = $(this)
-        var url = recipient
+        var url = 'doencas/' + recipient 
         modal.find('.botaoExcluir').attr('href', url)
     })
 </script>
