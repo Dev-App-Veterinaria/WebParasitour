@@ -11,7 +11,9 @@ class ArtigoController extends Controller
 
     public function __construct()
     {
+
         $this->server = "http://localhost:3001/api/article";
+
     }
     /**
      * Display a listing of the resource.

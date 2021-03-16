@@ -21,7 +21,12 @@ class DoencaController extends Controller
      */
     public function index()
     {   
+
+        //$servidor = '172.17.0.1:3001/api/disease';
+        //$doencas = Http::get($servidor)->json();
+
         $doencas = Http::get($this->server)->json();
+
         return view('doencas.list', ['doencas'=>$doencas]);        
     }
 
