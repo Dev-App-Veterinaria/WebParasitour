@@ -35,7 +35,7 @@ class ArtigoController extends Controller
      */
     public function create()
     {
-        return view('artigos/create');
+        return view('artigos/conteudo');
     }
 
     /**
@@ -83,7 +83,7 @@ class ArtigoController extends Controller
     {
         $artigo = Http::get($this->server.$id);
 
-        return view('artigos/create', ['artigo' => $artigo]);
+        return view('artigos/conteudo', ['artigo' => $artigo]);
     }
 
     /**
