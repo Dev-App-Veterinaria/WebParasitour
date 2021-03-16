@@ -7,6 +7,13 @@ use Illuminate\Support\Facades\Http;
 
 class DoencaController extends Controller
 {
+
+    private $server;
+
+    public function __construct()
+    {
+        $this->server = 'http://localhost:3001/api/disease/';
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +21,7 @@ class DoencaController extends Controller
      */
     public function index()
     {   
-        $servidor = 'http://localhost:3001/api/disease';
-        $doencas = Http::get($servidor)->json();
+        $doencas = Http::get($this->server)->json();
         return view('doencas.list', ['doencas'=>$doencas]);        
     }
 
@@ -26,7 +32,7 @@ class DoencaController extends Controller
      */
     public function create()
     {
-        return view('doencas.Conteudo');
+        return view('doencas.conteudo');
     }
 
     /**
@@ -37,8 +43,8 @@ class DoencaController extends Controller
      */
     public function store(Request $request)
     {
-        $response = Http::post( 'localhost:3001/api/disease/', [
-            'name' => $request->name,
+        $doencas = Http::post( 'localhost:3001/api/disease/', [
+            'name' => $request->nome,
             'etiologicalAgent' =>  $request->etiologicalAgent,
             'scientificName' =>  $request->scientificName,
             'vector' =>  $request->vector,
@@ -47,8 +53,9 @@ class DoencaController extends Controller
             'clinicalManifestation' =>  $request->clinicalManifestation,
             'complications' =>  $request->complications,
             'distribution' =>  $request->distribution,
-            'states' =>  $request->states,
+            'states' =>  $request->estados,
         ]);
+
         return redirect('/doencas');
     }
 
@@ -71,7 +78,9 @@ class DoencaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $doenca = Http::get($this->server.$id);
+
+        return view('doencas/conteudo', ['doenca' => $doenca]);
     }
 
     /**
@@ -83,7 +92,22 @@ class DoencaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $doencas = [
+            'name' => $request->name,
+            'etiologicalAgent' =>  $request->etiologicalAgent,
+            'scientificName' =>  $request->scientificName,
+            'vector' =>  $request->vector,
+            'lifeCycle' =>  $request->lifeCycle,
+            'transmission' =>  $request->transmission,
+            'clinicalManifestation' =>  $request->clinicalManifestation,
+            'complications' =>  $request->complications,
+            'distribution' =>  $request->distribution,
+            'states' =>  $request->states,
+        ];
+
+        Http::put($this->server.$id, $doencas);
+
+        return redirect('/doencas');
     }
 
     /**
@@ -94,10 +118,7 @@ class DoencaController extends Controller
      */
     public function destroy($id)
     {
-        $servidor = 'http://localhost:3001/api/disease';
-        $endereco = '$servidor';
-        $endereco = $endereco .  '$id';
-        $deletar = Http::delete('$endereco');
+        Http::delete($this->server.$id);
         return redirect('/doencas');
     }
 }

@@ -32,5 +32,11 @@ Route::get('/artigos/{id}', [ArtigoController::class, 'destroy'])->name('artigos
 
 //Rotas de doenças
 Route::get('/doencas',[DoencaController::class, 'index'])->name('doencas.index');
+
 Route::get('/doencas/create',[DoencaController::class, 'create']);
-Route::post('/doencas/create',[DoencaController::class, 'store'])->name('registrar');
+Route::post('/doencas/create',[DoencaController::class, 'store'])->name('doencas.store');
+
+Route::get('/doencas/{id}/edit', [DoencaController::class, 'edit'])->name('doencas.edit');
+Route::put('/doencas/{id}/edit', [DoencaController::class, 'update'])->name('doencas.update');
+
+Route::get('/doencas/{id}', [DoencaController::class, 'destroy'])->name('doencas.destroy');
