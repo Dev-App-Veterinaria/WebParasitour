@@ -11,7 +11,7 @@ class ArtigoController extends Controller
 
     public function __construct()
     {
-        $this->server = "10.147.208.7:3001/api/article/";
+        $this->server = "172.17.0.1:3001/api/article/";
     }
     /**
      * Display a listing of the resource.

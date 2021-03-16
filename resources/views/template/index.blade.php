@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <title>Parasitour</title>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Mobile Application HTML5 Template">
+    <meta name="copyright" content="MACode ID, https://www.macodeid.com/">
+    <title>Parasitour</title>
+    <link rel="shortcut icon" href="../assets/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/css/maicons.css">
+    <link rel="stylesheet" href="../assets/vendor/animate/animate.css">
+    <link rel="stylesheet" href="../assets/vendor/owl-carousel/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/css/mobster.css">
     
 </head>
 <body>
