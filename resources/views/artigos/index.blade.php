@@ -50,8 +50,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Excluir Artigo</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button> 
                 </div>
                 <div class="modal-body">
                     <p>Tem certeza que você deseja excluir esse artigo?</p>

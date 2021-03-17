@@ -21,12 +21,12 @@
                 <td>{{$doenca['etiologicalAgent']}}</td>
                 <td>{{$doenca['transmission']}}</td>
                 <td>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-toggle="modal" data-target="#excluirPopUp" data-id={{$doenca['_id']}}>Excluir</button>
+                </td>
+                <td>
                     <a href="{{url('doencas/'.$doenca['_id'].'/edit')}}" style="text-decoration:none">
                         <button type="button" class="btn btn-primary">Editar</button>
                     </a>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-toggle="modal" data-target="#excluirPopUp" data-id={{$doenca['_id']}}>Excluir</button>
                 </td>
             </tr>
             @empty
@@ -46,8 +46,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Excluir doença</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <p>Tem certeza que você deseja excluir essa doença?</p>
@@ -64,7 +64,6 @@
 <!-- Script em JS que passa o rapâmetr para o modal -->
 <script type="text/javascript">
     $('#excluirPopUp').on('show.bs.modal', function(event) {
-        dd("aqui")
         var button = $(event.relatedTarget) // Botão que acionou o modal
         var recipient = button.data('id') // Extrai informação do atributos data-*
         var modal = $(this)
