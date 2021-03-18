@@ -52,7 +52,7 @@
 
                             <div class="container">
                                 @csrf
-                                <table class="table table-striped">
+                                <table class="table table-striped table-responsive-sm">
                                     <thead>
                                         <tr>
                                             <th>Nome Cientifico</th>
