@@ -115,7 +115,12 @@
             </div>
 
             <div class="col-sm-5">
-                <ul id="myUL" >
+                <ul id="myUL">
+                    @if(isset($doenca))
+                        @foreach( $doenca['vector'] as $vector)
+                            <li><input class="form-control" name="vector[]" value="{{$vector ?? ''}}"></li>
+                        @endforeach
+                    @endif
                 </ul>
             </div>
         </div>
