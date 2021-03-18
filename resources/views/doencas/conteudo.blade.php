@@ -3,6 +3,7 @@
 @section('conteudo')
 
 
+
 <nav class="navbar navbar-expand-lg navbar-dark navbar-floating">
     <div class="container">
         <a class="navbar-brand" href="/">
@@ -22,6 +23,17 @@
                     </a>
                 </li>
             </ul>
+
+            <div class="col-sm-5">
+                <ul class="lista" id="myUL">
+                    @if(isset($doenca))
+                        @foreach( $doenca['vector'] as $vector)
+                            <li><input class="form-control" name="vector[]" value="{{$vector ?? ''}}"></li>
+                        @endforeach
+                    @endif
+                </ul>
+            </div>
+
         </div>
     </div>
 </nav>
@@ -405,59 +417,58 @@
 
 
 
-<style>
-/* Remove margins and padding from the list */
-ul {
-    margin: 0;
-    padding: 0;
-}
+   <style>
+        /* Remove margins and padding from the list */
+        .lista {
+            margin: 0;
+            padding: 0;
+        }
 
-/* Style the list items */
-ul li {
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    align-items: space-between;
-    cursor: pointer;
-    position: relative;
-    padding: 12px 8px 12px 8px;
-    list-style-type: none;
-    background: #eee;
-    font-size: 18px;
-    transition: 0.2s;
+        /* Style the list items */
+        .lista li {
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+            cursor: pointer;
+            position: relative;
+            padding: 12px 8px 12px 8px;
+            list-style-type: none;
+            background: #eee;
+            font-size: 18px;
+            transition: 0.2s;
 
-    /* make the list items unselectable */
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
+            /* make the list items unselectable */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
 
-ul li input {
-    flex: 10;
-}
+        .lista li input{
+            flex: 10;
+        }
+        /* Set all odd list items to a different color (zebra-stripes) */
+        .lista li:nth-child(odd) {
+            background: #f9f9f9;
+        }
 
-/* Set all odd list items to a different color (zebra-stripes) */
-ul li:nth-child(odd) {
-    background: #f9f9f9;
-}
+        /* Darker background-color on hover */
+        .lista li:hover {
+            background: #ddd;
+        }
 
-/* Darker background-color on hover */
-ul li:hover {
-    background: #ddd;
-}
+        /* Style the close button */
+        .close{
+            flex:1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-/* Style the close button */
-.close {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.close:hover {
-    background-color: #f44336;
-    color: white;
-}
+        .close:hover {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
 
 @endsection
