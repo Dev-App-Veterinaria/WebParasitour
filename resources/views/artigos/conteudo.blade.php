@@ -1,6 +1,11 @@
 @extends('template.template')
 
 @section('conteudo')
+    <style>
+        #doiDiv{
+            visibility: hidden;
+        }
+    </style>
     <div class="jumbotron text-center">
         <h1>Cadastrar Novo Artigo</h1>
     </div>
@@ -33,7 +38,14 @@
                     <label class="control-label col-sm-2" for="doi">DOI:</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="doi" name="doi"
-                               placeholder="Digite o DOI" value="{{$artigo['doi'] ?? ''}}" required>
+                               placeholder="Ex. 10.1109/5.771073" value="{{$artigo['doi'] ?? ''}}" onchange="onChangeText()" required>
+                    </div>
+                </div>
+
+                <div class="form-group t-10" id="doiDiv">
+                    <label class="control-label col-sm-2" for="doi">Url final:</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" id="doiUrl" value="" disabled>
                     </div>
                 </div>
 
@@ -41,7 +53,7 @@
                     <label class="control-label col-sm-2" for="citacao">Citação:</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="citacao" name="citacao"
-                               placeholder="Digite a citação" value="{{$artigo['citation'] ?? ''}}" required>
+                               placeholder="Ex: (SILVA, 2015)" value="{{$artigo['citation'] ?? ''}}" required>
                     </div>
                 </div>
 
@@ -50,14 +62,6 @@
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="doenca" name="doenca"
                                placeholder="Digite a doença" value="{{$artigo['disease'] ?? ''}}" required>
-                    </div>
-                </div>
-
-                <div class="form-group t-10">
-                    <label class="control-label col-sm-2" for="url">URL:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="url" name="url"
-                               placeholder="Digite a URL" value="{{$artigo['url'] ?? ''}}">
                     </div>
                 </div>
 
@@ -175,6 +179,12 @@
             </form>
 
             <script type="text/javascript">
+                function onChangeText(){
+                    let string = document.getElementById("doi").value
+                    document.getElementById("doiDiv").style.visibility = "visible";
+                    document.getElementById("doiUrl").value = "https://doi.org/" + string;
+                }
+
                 let estadosRecebidos =  `<?php isset($artigo) ?
                     $estados = implode(',' , $artigo['state']) : $estados = ''; echo $estados;?>`;
                 if(estadosRecebidos != ''){
@@ -184,6 +194,12 @@
                             estados[i].checked = true;
                         }
                     }
+                }
+
+                let doiString = document.getElementById("doi").value
+
+                if(doiString !== ''){
+                    onChangeText()
                 }
             </script>
     </div>
