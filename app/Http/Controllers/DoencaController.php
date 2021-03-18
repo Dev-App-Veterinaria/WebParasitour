@@ -98,7 +98,7 @@ class DoencaController extends Controller
     public function update(Request $request, $id)
     {
         $doencas = [
-            'name' => $request->name,
+            'name' => $request->nome,
             'etiologicalAgent' =>  $request->etiologicalAgent,
             'scientificName' =>  $request->scientificName,
             'vector' =>  $request->vector,
@@ -107,7 +107,7 @@ class DoencaController extends Controller
             'clinicalManifestation' =>  $request->clinicalManifestation,
             'complications' =>  $request->complications,
             'distribution' =>  $request->distribution,
-            'states' =>  $request->states,
+            'states' =>  $request->estados,
         ];
 
         Http::put($this->server.$id, $doencas);
