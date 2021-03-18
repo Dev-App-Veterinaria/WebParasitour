@@ -91,7 +91,7 @@
                                 <div class="col-lg-4 py-4">
                                     <div class="team-item">
                                         <a href="{{url('artigos/create')}}" style="text-decoration:none">
-                                            <button class="btn btn-primary rounded-pill">Adiconar Artigo</button>
+                                            <button class="btn btn-primary rounded-pill">Adicionar Artigo</button>
                                         </a>
                                     </div>
                                 </div>

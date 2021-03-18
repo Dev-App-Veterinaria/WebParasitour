@@ -3,17 +3,16 @@
 @section('conteudo')
     <style>
         /* Remove margins and padding from the list */
-        ul {
+        .lista {
             margin: 0;
             padding: 0;
         }
 
         /* Style the list items */
-        ul li {
+        .lista li {
             display: flex;
             flex-direction: row;
             flex-grow: 1;
-            align-items: space-between;
             cursor: pointer;
             position: relative;
             padding: 12px 8px 12px 8px;
@@ -29,16 +28,16 @@
             user-select: none;
         }
 
-        ul li input{
+        .lista li input{
             flex: 10;
         }
         /* Set all odd list items to a different color (zebra-stripes) */
-        ul li:nth-child(odd) {
+        .lista li:nth-child(odd) {
             background: #f9f9f9;
         }
 
         /* Darker background-color on hover */
-        ul li:hover {
+        .lista li:hover {
             background: #ddd;
         }
 
@@ -115,7 +114,7 @@
             </div>
 
             <div class="col-sm-5">
-                <ul id="myUL">
+                <ul class="lista" id="myUL">
                     @if(isset($doenca))
                         @foreach( $doenca['vector'] as $vector)
                             <li><input class="form-control" name="vector[]" value="{{$vector ?? ''}}"></li>
