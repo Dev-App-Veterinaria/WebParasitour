@@ -68,16 +68,16 @@
                                             <td>{{$artigo['name']}}</td>
                                             <td>{{$artigo['disease']}}</td>
                                             <td>
-                                                <button type="button" class="btn btn-danger rounded-pill"
+                                                <button type="button" class="btn btn-danger rounded-pill fas fa-trash"
                                                     data-toggle="modal" data-toggle="modal" data-target="#excluirPopUp"
-                                                    data-id={{$artigo['_id']}}>Excluir
+                                                    data-id={{$artigo['_id']}}>
                                                 </button>
                                             </td>
                                             <td>
                                                 <a href="{{url('artigos/'.$artigo['_id'].'/edit')}}"
                                                     style="text-decoration:none">
                                                     <button type="button"
-                                                        class="btn btn-primary rounded-pill">Editar</button>
+                                                        class="btn btn-primary rounded-pill fas fa-edit"></button>
                                                 </a>
                                         </tr>
                                         @endforeach

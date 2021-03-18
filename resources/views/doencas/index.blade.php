@@ -56,7 +56,8 @@
                                     <thead>
                                         <tr>
                                             <th>Nome Cientifico</th>
-                                            <th>Agente etiológico</th>
+                                            <th>Nome Popular</th>
+                                            <th>Agente Etiológico</th>
                                             <th>Transmissão</th>
                                         </tr>
                                     </thead>
@@ -64,18 +65,19 @@
                                         @forelse($doencas as $doenca)
                                         <tr>
                                             <td>{{$doenca['scientificName']}}</td>
+                                            <td>{{$doenca['name']}}</td>
                                             <td>{{$doenca['etiologicalAgent']}}</td>
                                             <td>{{$doenca['transmission']}}</td>
                                             <td>
-                                                <button type="button" class="btn btn-danger rounded-pill"
-                                                    data-toggle="modal" data-toggle="modal" data-target="#excluirPopUp"
-                                                    data-id={{$doenca['_id']}}>Excluir</button>
+                                                <button type="button" class="btn btn-danger rounded-pill fas fa-trash" 
+                                                    data-toggle="modal" data-target="#excluirPopUp"
+                                                    data-id={{$doenca['_id']}}></button>
                                             </td>
                                             <td>
                                                 <a href="{{url('doencas/'.$doenca['_id'].'/edit')}}"
                                                     style="text-decoration:none">
                                                     <button type="button"
-                                                        class="btn btn-primary rounded-pill">Editar</button>
+                                                        class="btn btn-primary rounded-pill fas fa-edit"></button>
                                                 </a>
                                             </td>
                                         </tr>
