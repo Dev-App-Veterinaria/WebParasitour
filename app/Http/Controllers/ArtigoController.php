@@ -53,7 +53,6 @@ class ArtigoController extends Controller
             'citation' => $request->input('citacao'),
             'disease' => $request->input('doenca'),
             'state' => $request->input('estados'),
-            'url' => $request->input('url')
         ];
 
         Http::post($this->server, $cadastro);
@@ -102,7 +101,6 @@ class ArtigoController extends Controller
             'citation' => $request->input('citacao'),
             'disease' => $request->input('doenca'),
             'state' => $request->input('estados'),
-            'url' => $request->input('url')
         ];
 
         Http::put($this->server.$id, $artigo);

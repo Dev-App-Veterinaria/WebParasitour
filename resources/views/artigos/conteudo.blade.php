@@ -1,191 +1,331 @@
 @extends('template.template')
 
 @section('conteudo')
-    <div class="jumbotron text-center">
-        <h1>Cadastrar Novo Artigo</h1>
-    </div>
 
+<style>
+#doiDiv {
+    visibility: hidden;
+}
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-floating">
     <div class="container">
-        @if(isset($errors) && count($errors)>0)
-            <div class="text-center alert-danger">
-                @foreach($errors->all() as $erro)
-                    {{$erro}}<br>
-                @endforeach
+        <a class="navbar-brand" href="/">
+            <img src="/assets/favicon3.png" alt="" width="40%">
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarToggler">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <li class="nav-item ">
+                    <a class="nav-link" href="/doencas">
+                        <h5>Doenças</h5>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/artigos">
+                        <h5>Artigos</h5>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="col-sm-5">
+                <ul class="lista" id="myUL">
+                    @if(isset($doenca))
+                    @foreach( $doenca['vector'] as $vector)
+                    <li><input class="form-control" name="vector[]" value="{{$vector ?? ''}}"></li>
+                    @endforeach
+                    @endif
+                </ul>
             </div>
-        @endif
 
-        @if(isset($artigo))
-            <form action name="edit" id="create" method="post" action="{{url('artigo.update')}}">
-            @method('PUT')
-        @else
-            <form action name="create" id="create" method="post" action="{{url('artigo.store')}}">
-                @endif
-                @csrf
-                <div class="form-group">
-                    <label class="form-control-label col-sm-2" for="nome">Nome:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nome" name="nome"
-                               placeholder="Digite o nome" value="{{$artigo['name'] ?? ''}}" required>
-                    </div>
-                </div>
-
-                <div class="form-group t-10">
-                    <label class="control-label col-sm-2" for="doi">DOI:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="doi" name="doi"
-                               placeholder="Digite o DOI" value="{{$artigo['doi'] ?? ''}}" required>
-                    </div>
-                </div>
-
-                <div class="form-group t-10">
-                    <label class="control-label col-sm-2" for="citacao">Citação:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="citacao" name="citacao"
-                               placeholder="Digite a citação" value="{{$artigo['citation'] ?? ''}}" required>
-                    </div>
-                </div>
-
-                <div class="form-group t-10">
-                    <label class="control-label col-sm-2" for="doenca">Doença:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="doenca" name="doenca"
-                               placeholder="Digite a doença" value="{{$artigo['disease'] ?? ''}}" required>
-                    </div>
-                </div>
-
-                <div class="form-group t-10">
-                    <label class="control-label col-sm-2" for="url">URL:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="url" name="url"
-                               placeholder="Digite a URL" value="{{$artigo['url'] ?? ''}}">
-                    </div>
-                </div>
-
-                <div class="form-group t-10">
-                    <label class="control-label col-sm-2" for="estados">Estados:</label>
-                    <div class="col-sm-10">
-                        <table class="table table-striped">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="estados[]" value="Acre">
-                                        <label>Acre</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="Alagoas">
-                                        <label>Alagoas</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="Amapá">
-                                        <label>Amapá</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="Amazonas">
-                                        <label>Amazonas</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="Bahia">
-                                        <label>Bahia</label><br>
-                                    </td>
-
-                                    <td>
-                                        <input type="checkbox" name="estados[]" value="Ceará">
-                                        <label>Ceará</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="Distrito Federal">
-                                        <label>Distrito Federal</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="Espírito Santo">
-                                        <label>Espírito Santo</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="Goiás">
-                                        <label>Goiás</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="Maranhão">
-                                        <label>Maranhão</label><br>
-                                    </td>
-
-                                    <td>
-                                        <input type="checkbox" name="estados[]" value="Mato Grosso">
-                                        <label>Mato Grosso</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="Mato Grosso do Sul">
-                                        <label>Mato Grosso do Sul</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="Minas Gerais">
-                                        <label>Minas Gerais</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="Pará">
-                                        <label>Pará</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="Paraíba">
-                                        <label>Paraíba</label><br>
-                                    </td>
-
-                                    <td>
-                                        <input type="checkbox" name="estados[]" value="Paraná">
-                                        <label>Paraná</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="Pernambuco">
-                                        <label>Pernambuco</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="Piauí">
-                                        <label>Piauí</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="Rio de Janeiro">
-                                        <label>Rio de Janeiro</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="Rio Grande do Sul">
-                                        <label>Rio Grande do Sul</label><br>
-                                    </td>
-
-                                    <td>
-                                        <input type="checkbox" name="estados[]" value="Rio Grande do Norte">
-                                        <label>Rio Grande do Norte</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="Rondônia">
-                                        <label>Rondônia</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="Roraima">
-                                        <label>Roraima</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="Santa Catarina">
-                                        <label>Santa Catarina</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="São Paulo">
-                                        <label>São Paulo</label><br>
-                                    </td>
-
-                                    <td>
-                                        <input type="checkbox" name="estados[]" value="Sergipe">
-                                        <label>Sergipe</label><br>
-
-                                        <input type="checkbox" name="estados[]" value="Tocantins">
-                                        <label>Tocantins</label><br>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <br>
-
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-success">Cadastrar</button>
-                    </div>
-                </div>
-            </form>
-
-            <script type="text/javascript">
-                let estadosRecebidos =  `<?php isset($artigo) ?
-                    $estados = implode(',' , $artigo['state']) : $estados = ''; echo $estados;?>`;
-                if(estadosRecebidos != ''){
-                    let estados = document.getElementsByName('estados[]');
-                    for(let i = 0; i< estados.length; i++){
-                        if(estadosRecebidos.includes(estados[i].value)){
-                            estados[i].checked = true;
-                        }
-                    }
-                }
-            </script>
+        </div>
     </div>
+</nav>
+
+<main class="bg-light">
+
+    <div class="page-hero-section bg-image hero-mini" style="background-image: url(/assets/img/hero_mini.svg);">
+        <div class="hero-caption">
+            <div class="container fg-white h-100">
+                <div class="row justify-content-center align-items-center text-center h-100">
+                    <div class="col-lg-6">
+                        <h1 class="mb-4 fw-bold">Artigo</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col">
+
+                    <div class="card-page mt-2">
+
+                        <div class="card-page">
+                            <h5 class="fg-primary">Artigo</h5>
+
+
+
+                            @if(isset($errors) && count($errors)>0)
+                            <div class="text-center alert-danger">
+                                @foreach($errors->all() as $erro)
+                                {{$erro}}<br>
+                                @endforeach
+                            </div>
+                            @endif
+
+                            @if(isset($artigo))
+                            <form action name="edit" id="create" method="post" action="{{url('artigo.update')}}">
+                                @method('PUT')
+                                @else
+                                <form action name="create" id="create" method="post" action="{{url('artigo.store')}}">
+                                    @endif
+                                    @csrf
+                                    <div class="form-group">
+                                        <label class="form-control-label col-sm-2" for="nome">Título:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="nome" name="nome"
+                                                placeholder="Digite o nome" value="{{$artigo['name'] ?? ''}}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group t-10">
+                                        <label class="control-label col-sm-2" for="doi">DOI:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="doi" name="doi"
+                                                placeholder="Ex: 10.1109/5.771073" value="{{$artigo['doi'] ?? ''}}"
+                                                onchange="onChangeText()" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group t-10" id="doiDiv">
+                                        <label class="control-label col-sm-2" for="doi">URL de acesso:</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" type="text" id="doiUrl" value="" disabled>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group t-10">
+                                        <label class="control-label col-sm-2" for="citacao">Citação:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="citacao" name="citacao"
+                                                placeholder="Ex: (SILVA, 2015)" value="{{$artigo['citation'] ?? ''}}"
+                                                required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group t-10">
+                                        <label class="control-label col-sm-2" for="doenca">Doença:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="doenca" name="doenca"
+                                                placeholder="Digite a doença" value="{{$artigo['disease'] ?? ''}}"
+                                                required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group t-10">
+                                        <label class="control-label col-sm-2" for="estados">Estados:</label>
+                                        <div class="col-sm-10">
+                                            <table class="table table-borderless table-responsive-sm">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <input type="checkbox" name="estados[]" value="Acre">
+                                                            <label>AC</label><br>
+
+                                                            <input type="checkbox" name="estados[]" value="Alagoas">
+                                                            <label>AL</label><br>
+
+                                                            <input type="checkbox" name="estados[]" value="Amapá">
+                                                            <label>AP</label><br>
+
+                                                            <input type="checkbox" name="estados[]" value="Amazonas">
+                                                            <label>AM</label><br>
+
+                                                            <input type="checkbox" name="estados[]" value="Bahia">
+                                                            <label>BA</label><br>
+                                                        </td>
+
+                                                        <td>
+                                                            <input type="checkbox" name="estados[]" value="Ceará">
+                                                            <label>CE</label><br>
+
+                                                            <input type="checkbox" name="estados[]"
+                                                                value="Distrito Federal">
+                                                            <label>DF</label><br>
+
+                                                            <input type="checkbox" name="estados[]"
+                                                                value="Espírito Santo">
+                                                            <label>ES</label><br>
+
+                                                            <input type="checkbox" name="estados[]" value="Goiás">
+                                                            <label>GO</label><br>
+
+                                                            <input type="checkbox" name="estados[]" value="Maranhão">
+                                                            <label>MA</label><br>
+                                                        </td>
+
+                                                        <td>
+                                                            <input type="checkbox" name="estados[]" value="Mato Grosso">
+                                                            <label>MT</label><br>
+
+                                                            <input type="checkbox" name="estados[]"
+                                                                value="Mato Grosso do Sul">
+                                                            <label>MS</label><br>
+
+                                                            <input type="checkbox" name="estados[]"
+                                                                value="Minas Gerais">
+                                                            <label>MG</label><br>
+
+                                                            <input type="checkbox" name="estados[]" value="Pará">
+                                                            <label>PA</label><br>
+
+                                                            <input type="checkbox" name="estados[]" value="Paraíba">
+                                                            <label>PB</label><br>
+                                                        </td>
+
+                                                        <td>
+                                                            <input type="checkbox" name="estados[]" value="Paraná">
+                                                            <label>PR</label><br>
+
+                                                            <input type="checkbox" name="estados[]" value="Pernambuco">
+                                                            <label>PE</label><br>
+
+                                                            <input type="checkbox" name="estados[]" value="Piauí">
+                                                            <label>PI</label><br>
+
+                                                            <input type="checkbox" name="estados[]"
+                                                                value="Rio de Janeiro">
+                                                            <label>RJ</label><br>
+
+                                                            <input type="checkbox" name="estados[]"
+                                                                value="Rio Grande do Sul">
+                                                            <label>RS</label><br>
+                                                        </td>
+
+                                                        <td>
+                                                            <input type="checkbox" name="estados[]"
+                                                                value="Rio Grande do Norte">
+                                                            <label>RN</label><br>
+
+                                                            <input type="checkbox" name="estados[]" value="Rondônia">
+                                                            <label>RO</label><br>
+
+                                                            <input type="checkbox" name="estados[]" value="Roraima">
+                                                            <label>RR</label><br>
+
+                                                            <input type="checkbox" name="estados[]"
+                                                                value="Santa Catarina">
+                                                            <label>SC</label><br>
+
+                                                            <input type="checkbox" name="estados[]" value="São Paulo">
+                                                            <label>SP</label><br>
+
+                                                        </td>
+
+                                                        <td>
+
+                                                            <input type="checkbox" name="estados[]" value="Sergipe">
+                                                            <label>SE</label><br>
+
+                                                            <input type="checkbox" name="estados[]" value="Tocantins">
+                                                            <label>TO</label><br>
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+
+                                    <br>
+
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-4 py-4">
+                                            <div class="team-item">
+                                                <button type="submit" class="btn btn-primary rounded-pill">⠀⠀Salvar⠀⠀
+                                                </button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Créditos -->
+    <div class="page-footer-section bg-dark fg-white">
+        <div class="container">
+            <div class="row mb-5 py-3">
+                <div class="col-sm-6 py-3">
+                    <h5 class="mb-3">Sistema desenvolvido por alunos da<br>
+                        Universidade Federal do Agreste de Pernambuco<br>
+                        e do Instituto Federal de Pernambuco.</h5>
+                </div>
+                <div class="col-md-6 col-lg-4 py-3">
+                    <h5 class="mb-3">Grupos de pesquisa envolvidos:</h5>
+                    <p>• UNAME RESEARCH GROUP</p>
+                    <p>• LAPAR</p>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 py-2">
+                    <img src="/assets/favicon-light.png" alt="" width="40">
+                    <p class="d-inline-block ml-2">Créditos template: &copy; <a href="https://www.macodeid.com/"
+                            class="fg-white fw-medium">MACode ID</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script type="text/javascript">
+function onChangeText() {
+    let string = document.getElementById("doi").value
+    document.getElementById("doiDiv").style.visibility = "visible";
+    document.getElementById("doiUrl").value = "https://doi.org/" + string;
+}
+
+let estadosRecebidos = `<?php isset($artigo) ?
+                    $estados = implode(',' , $artigo['state']) : $estados = ''; echo $estados;?>`;
+if (estadosRecebidos != '') {
+    let estados = document.getElementsByName('estados[]');
+    for (let i = 0; i < estados.length; i++) {
+        if (estadosRecebidos.includes(estados[i].value)) {
+            estados[i].checked = true;
+        }
+    }
+}
+
+let doiString = document.getElementById("doi").value
+
+if (doiString !== '') {
+    onChangeText()
+}
+</script>
+
+<script src="/assets/js/jquery-3.5.1.min.js"></script>
+
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="/assets/vendor/owl-carousel/js/owl.carousel.min.js"></script>
+
+<script src="/assets/vendor/wow/wow.min.js"></script>
+
+<script src="/assets/js/mobster.js"></script>
 
 @endsection
