@@ -9,11 +9,11 @@
     <meta name="copyright" content="MACode ID, https://www.macodeid.com/">
     <title>Parasitour</title>
     <link rel="shortcut icon" href="../assets/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="../assets/css/maicons.css">
-    <link rel="stylesheet" href="../assets/vendor/animate/animate.css">
-    <link rel="stylesheet" href="../assets/vendor/owl-carousel/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../assets/css/bootstrap.css">
-    <link rel="stylesheet" href="../assets/css/mobster.css">
+    <link rel="stylesheet" href="/assets/css/maicons.css">
+    <link rel="stylesheet" href="/assets/vendor/animate/animate.css">
+    <link rel="stylesheet" href="/assets/vendor/owl-carousel/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/mobster.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>
