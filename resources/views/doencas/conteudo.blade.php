@@ -3,64 +3,64 @@
 @section('conteudo')
 
 <style>
-/* Remove margins and padding from the list */
-.lista {
-    margin: 0;
-    padding: 0;
-}
+    /* Remove margins and padding from the list */
+    .lista {
+        margin: 0;
+        padding: 0;
+    }
 
-/* Style the list items */
-.lista li {
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    cursor: pointer;
-    position: relative;
-    padding: 12px 8px 12px 8px;
-    list-style-type: none;
-    background: #eee;
-    font-size: 18px;
-    transition: 0.2s;
+    /* Style the list items */
+    .lista li {
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        cursor: pointer;
+        position: relative;
+        padding: 12px 8px 12px 8px;
+        list-style-type: none;
+        background: #eee;
+        font-size: 18px;
+        transition: 0.2s;
 
-    /* make the list items unselectable */
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
+        /* make the list items unselectable */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
 
-.lista li input {
-    flex: 10;
-}
+    .lista li input {
+        flex: 10;
+    }
 
-/* Set all odd list items to a different color (zebra-stripes) */
-.lista li:nth-child(odd) {
-    background: #f9f9f9;
-}
+    /* Set all odd list items to a different color (zebra-stripes) */
+    .lista li:nth-child(odd) {
+        background: #f9f9f9;
+    }
 
-/* Darker background-color on hover */
-.lista li:hover {
-    background: #ddd;
-}
+    /* Darker background-color on hover */
+    .lista li:hover {
+        background: #ddd;
+    }
 
-/* Style the close button */
-.close {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    /* Style the close button */
+    .close {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-.close:hover {
-    background-color: #f44336;
-    color: white;
-}
+    .close:hover {
+        background-color: #f44336;
+        color: white;
+    }
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-dark navbar-floating">
     <div class="container">
         <a class="navbar-brand" href="/">
-            <img src="../assets/favicon3.png" alt="" width="40%">
+            <img src="/assets/favicon3.png" alt="" width="40%">
         </a>
 
         <div class="collapse navbar-collapse" id="navbarToggler">
@@ -76,24 +76,13 @@
                     </a>
                 </li>
             </ul>
-
-            <div class="col-sm-5">
-                <ul class="lista" id="myUL">
-                    @if(isset($doenca))
-                    @foreach( $doenca['vector'] as $vector)
-                    <li><input class="form-control" name="vector[]" value="{{$vector ?? ''}}"></li>
-                    @endforeach
-                    @endif
-                </ul>
-            </div>
-
         </div>
     </div>
 </nav>
 
 <main class="bg-light">
 
-    <div class="page-hero-section bg-image hero-mini" style="background-image: url(../assets/img/hero_mini.svg);">
+    <div class="page-hero-section bg-image hero-mini" style="background-image: url(/assets/img/hero_mini.svg);">
         <div class="hero-caption">
             <div class="container fg-white h-100">
                 <div class="row justify-content-center align-items-center text-center h-100">
@@ -182,12 +171,14 @@
                                         </div>
 
                                         <div class="col-sm-5">
-                                            <ul id="myUL">
+                                            <ul id="tableUL" class="lista">
                                                 @if(isset($doenca))
-                                                @foreach( $doenca['vector'] as $vector)
-                                                <li><input class="form-control" name="vector[]"
-                                                        value="{{$vector ?? ''}}"></li>
-                                                @endforeach
+                                                    @foreach( $doenca['vector'] as $vector)
+                                                        <li>
+                                                            <input class="form-control" name="vector[]" value="{{$vector ?? ''}}">
+                                                            <span class="close">x</span>
+                                                        </li>
+                                                    @endforeach
                                                 @endif
                                             </ul>
                                         </div>
@@ -388,7 +379,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-6 py-2">
-                    <img src="../assets/favicon-light.png" alt="" width="40">
+                    <img src="/assets/favicon-light.png" alt="" width="40">
                     <p class="d-inline-block ml-2">Créditos template: &copy; <a href="https://www.macodeid.com/"
                             class="fg-white fw-medium">MACode ID</a>.</p>
                 </div>
@@ -398,78 +389,81 @@
 </main>
 
 <script type="text/javascript">
-let estadosRecebidos = `<?php isset($doenca) ?
-        $estados = implode(',' , $doenca['states']) : $estados = ''; echo $estados;?>`;
-if (estadosRecebidos != '') {
-    let estados = document.getElementsByName('estados[]');
-    for (let i = 0; i < estados.length; i++) {
-        if (estadosRecebidos.includes(estados[i].value)) {
-            estados[i].checked = true;
+    //Inicialização das informações
+    let estadosRecebidos = `<?php isset($doenca) ?
+            $estados = implode(',' , $doenca['states']) : $estados = ''; echo $estados;?>`;
+    if (estadosRecebidos != '') {
+        let estados = document.getElementsByName('estados[]');
+        for (let i = 0; i < estados.length; i++) {
+            if (estadosRecebidos.includes(estados[i].value)) {
+                estados[i].checked = true;
+            }
         }
     }
-}
 
-// Create a "close" button and append it to each list item
-var myNodelist = document.getElementsByName("vector[]");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-    var span = document.createElement("SPAN");
-    var txt = document.createTextNode("\u00D7");
-    span.className = "close";
-    span.appendChild(txt);
-    myNodelist[i].appendChild(span);
-}
-
-// Click on a close button to hide the current list item
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-        var div = this.parentElement;
-        div.style.display = "none";
+    // Create a "close" button and append it to each list item
+    var myNodelist = document.getElementsByName("vector[]");
+    var i;
+    for (i = 0; i < myNodelist.length; i++) {
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        myNodelist[i].appendChild(span);
     }
-}
 
-// Create a new list item when clicking on the "Add" button
-function newElement() {
-    var li = document.createElement("li");
-    var inputValue = document.getElementById("myInput").value;
-    var t = document.createElement("input");
-    t.value = inputValue;
-    t.setAttribute("class", "form-control");
-    t.setAttribute("name", "vector[]");
-    li.appendChild(t);
-    if (inputValue === '') {
-        alert("You must write something!");
-    } else {
-        document.getElementById("myUL").appendChild(li);
-    }
-    document.getElementById("myInput").value = "";
 
-    var span = document.createElement("SPAN");
-    var txt = document.createTextNode("\u00D7");
-    span.className = "close";
-    span.appendChild(txt);
-    li.appendChild(span);
-
+    // Click on a close button to hide the current list item
+    var close = document.getElementsByClassName("close");
+    var i;
     for (i = 0; i < close.length; i++) {
         close[i].onclick = function() {
             var div = this.parentElement;
-            div.style.display = "none";
+            $(div).remove();
         }
     }
+
+    // Create a new list item when clicking on the "Add" button
+    function newElement() {
+        var li = document.createElement("li");
+        var inputValue = document.getElementById("myInput").value;
+        var t = document.createElement("input");
+        t.value = inputValue;
+        t.setAttribute("class", "form-control");
+        t.setAttribute("name", "vector[]");
+        li.appendChild(t);
+
+        if (inputValue === '') {
+            alert("Você deve digitar algo!");
+        } else {
+            document.getElementById("tableUL").appendChild(li);
+        }
+        document.getElementById("myInput").value = "";
+
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        li.appendChild(span);
+
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function() {
+                var div = this.parentElement;
+                $(div).remove();
+            }
+        }
 }
 </script>
 
-<script src="../assets/js/jquery-3.5.1.min.js"></script>
+<script src="/assets/js/jquery-3.5.1.min.js"></script>
 
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
 
-<script src="../assets/vendor/owl-carousel/js/owl.carousel.min.js"></script>
+<script src="/assets/vendor/owl-carousel/js/owl.carousel.min.js"></script>
 
-<script src="../assets/vendor/wow/wow.min.js"></script>
+<script src="/assets/vendor/wow/wow.min.js"></script>
 
-<script src="../assets/js/mobster.js"></script>
+<script src="/assets/js/mobster.js"></script>
 
 
 

@@ -6,7 +6,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark navbar-floating">
     <div class="container">
         <a class="navbar-brand" href="/">
-            <img src="../assets/favicon3.png" alt="" width="40%">
+            <img src="/assets/favicon3.png" alt="" width="40%">
         </a>
 
         <div class="collapse navbar-collapse" id="navbarToggler">
@@ -28,7 +28,7 @@
 
 <main class="bg-light">
 
-    <div class="page-hero-section bg-image hero-mini" style="background-image: url(../assets/img/hero_mini.svg);">
+    <div class="page-hero-section bg-image hero-mini" style="background-image: url(/assets/img/hero_mini.svg);">
         <div class="hero-caption">
             <div class="container fg-white h-100">
                 <div class="row justify-content-center align-items-center text-center h-100">
@@ -157,7 +157,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-6 py-2">
-                    <img src="../assets/favicon-light.png" alt="" width="40">
+                    <img src="/assets/favicon-light.png" alt="" width="40">
                     <p class="d-inline-block ml-2">Créditos template: &copy; <a href="https://www.macodeid.com/"
                             class="fg-white fw-medium">MACode ID</a>.</p>
                 </div>
@@ -165,15 +165,15 @@
         </div>
     </div>
 </main>
-<script src="../assets/js/jquery-3.5.1.min.js"></script>
+<script src="/assets/js/jquery-3.5.1.min.js"></script>
 
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
 
-<script src="../assets/vendor/owl-carousel/js/owl.carousel.min.js"></script>
+<script src="/assets/vendor/owl-carousel/js/owl.carousel.min.js"></script>
 
-<script src="../assets/vendor/wow/wow.min.js"></script>
+<script src="/assets/vendor/wow/wow.min.js"></script>
 
-<script src="../assets/js/mobster.js"></script>
+<script src="/assets/js/mobster.js"></script>
 
 
 
