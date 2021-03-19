@@ -2,7 +2,60 @@
 
 @section('conteudo')
 
+<style>
+/* Remove margins and padding from the list */
+.lista {
+    margin: 0;
+    padding: 0;
+}
 
+/* Style the list items */
+.lista li {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 8px;
+    list-style-type: none;
+    background: #eee;
+    font-size: 18px;
+    transition: 0.2s;
+
+    /* make the list items unselectable */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.lista li input {
+    flex: 10;
+}
+
+/* Set all odd list items to a different color (zebra-stripes) */
+.lista li:nth-child(odd) {
+    background: #f9f9f9;
+}
+
+/* Darker background-color on hover */
+.lista li:hover {
+    background: #ddd;
+}
+
+/* Style the close button */
+.close {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close:hover {
+    background-color: #f44336;
+    color: white;
+}
+</style>
 
 <nav class="navbar navbar-expand-lg navbar-dark navbar-floating">
     <div class="container">
@@ -27,9 +80,9 @@
             <div class="col-sm-5">
                 <ul class="lista" id="myUL">
                     @if(isset($doenca))
-                        @foreach( $doenca['vector'] as $vector)
-                            <li><input class="form-control" name="vector[]" value="{{$vector ?? ''}}"></li>
-                        @endforeach
+                    @foreach( $doenca['vector'] as $vector)
+                    <li><input class="form-control" name="vector[]" value="{{$vector ?? ''}}"></li>
+                    @endforeach
                     @endif
                 </ul>
             </div>
@@ -74,10 +127,12 @@
                             @endif
 
                             @if(isset($doenca))
-                            <form class="form-group" action name="edit" id="create" method="post" action="{{url('doencas.update')}}">
+                            <form class="form-group" action name="edit" id="create" method="post"
+                                action="{{url('doencas.update')}}">
                                 @method('PUT')
                                 @else
-                                <form class="form-group" action name="create" id="create" method="post" action="{{url('doencas.store')}}">
+                                <form class="form-group" action name="create" id="create" method="post"
+                                    action="{{url('doencas.store')}}">
                                     @endif
                                     @csrf
                                     <div class="form-group">
@@ -304,70 +359,6 @@
                                     </div>
                                 </form>
                         </div>
-                        <script type="text/javascript">
-                        let estadosRecebidos = `<?php isset($doenca) ?
-                            $estados = implode(',' , $doenca['states']) : $estados = ''; echo $estados;?>`;
-                        if (estadosRecebidos != '') {
-                            let estados = document.getElementsByName('estados[]');
-                            for (let i = 0; i < estados.length; i++) {
-                                if (estadosRecebidos.includes(estados[i].value)) {
-                                    estados[i].checked = true;
-                                }
-                            }
-                        }
-                        </script>
-                        <script>
-                        // Create a "close" button and append it to each list item
-                        var myNodelist = document.getElementsByTagName("LI");
-                        var i;
-                        for (i = 0; i < myNodelist.length; i++) {
-                            var span = document.createElement("SPAN");
-                            var txt = document.createTextNode("\u00D7");
-                            span.className = "close";
-                            span.appendChild(txt);
-                            myNodelist[i].appendChild(span);
-                        }
-
-                        // Click on a close button to hide the current list item
-                        var close = document.getElementsByClassName("close");
-                        var i;
-                        for (i = 0; i < close.length; i++) {
-                            close[i].onclick = function() {
-                                var div = this.parentElement;
-                                div.style.display = "none";
-                            }
-                        }
-
-                        // Create a new list item when clicking on the "Add" button
-                        function newElement() {
-                            var li = document.createElement("li");
-                            var inputValue = document.getElementById("myInput").value;
-                            var t = document.createElement("input");
-                            t.value = inputValue;
-                            t.setAttribute("class", "form-control");
-                            t.setAttribute("name", "vector[]");
-                            li.appendChild(t);
-                            if (inputValue === '') {
-                                alert("You must write something!");
-                            } else {
-                                document.getElementById("myUL").appendChild(li);
-                            }
-                            document.getElementById("myInput").value = "";
-
-                            var span = document.createElement("SPAN");
-                            var txt = document.createTextNode("\u00D7");
-                            span.className = "close btn-default";
-                            span.appendChild(txt);
-                            li.appendChild(span);
-
-                            for (i = 0; i < close.length; i++) {
-                                close[i].onclick = function() {
-                                    var div = this.parentElement;
-                                    div.style.display = "none";
-                                }
-                            }
-                        }
-                        </script>
 
                     </div>
 
@@ -405,6 +396,71 @@
         </div>
     </div>
 </main>
+
+<script type="text/javascript">
+let estadosRecebidos = `<?php isset($doenca) ?
+        $estados = implode(',' , $doenca['states']) : $estados = ''; echo $estados;?>`;
+if (estadosRecebidos != '') {
+    let estados = document.getElementsByName('estados[]');
+    for (let i = 0; i < estados.length; i++) {
+        if (estadosRecebidos.includes(estados[i].value)) {
+            estados[i].checked = true;
+        }
+    }
+}
+
+// Create a "close" button and append it to each list item
+var myNodelist = document.getElementsByName("vector[]");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+    var span = document.createElement("SPAN");
+    var txt = document.createTextNode("\u00D7");
+    span.className = "close";
+    span.appendChild(txt);
+    myNodelist[i].appendChild(span);
+}
+
+// Click on a close button to hide the current list item
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+        var div = this.parentElement;
+        div.style.display = "none";
+    }
+}
+
+// Create a new list item when clicking on the "Add" button
+function newElement() {
+    var li = document.createElement("li");
+    var inputValue = document.getElementById("myInput").value;
+    var t = document.createElement("input");
+    t.value = inputValue;
+    t.setAttribute("class", "form-control");
+    t.setAttribute("name", "vector[]");
+    li.appendChild(t);
+    if (inputValue === '') {
+        alert("You must write something!");
+    } else {
+        document.getElementById("myUL").appendChild(li);
+    }
+    document.getElementById("myInput").value = "";
+
+    var span = document.createElement("SPAN");
+    var txt = document.createTextNode("\u00D7");
+    span.className = "close";
+    span.appendChild(txt);
+    li.appendChild(span);
+
+    for (i = 0; i < close.length; i++) {
+        close[i].onclick = function() {
+            var div = this.parentElement;
+            div.style.display = "none";
+        }
+    }
+}
+</script>
+
 <script src="../assets/js/jquery-3.5.1.min.js"></script>
 
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
@@ -417,58 +473,5 @@
 
 
 
-   <style>
-        /* Remove margins and padding from the list */
-        .lista {
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Style the list items */
-        .lista li {
-            display: flex;
-            flex-direction: row;
-            flex-grow: 1;
-            cursor: pointer;
-            position: relative;
-            padding: 12px 8px 12px 8px;
-            list-style-type: none;
-            background: #eee;
-            font-size: 18px;
-            transition: 0.2s;
-
-            /* make the list items unselectable */
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        .lista li input{
-            flex: 10;
-        }
-        /* Set all odd list items to a different color (zebra-stripes) */
-        .lista li:nth-child(odd) {
-            background: #f9f9f9;
-        }
-
-        /* Darker background-color on hover */
-        .lista li:hover {
-            background: #ddd;
-        }
-
-        /* Style the close button */
-        .close{
-            flex:1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .close:hover {
-            background-color: #f44336;
-            color: white;
-        }
-    </style>
 
 @endsection
