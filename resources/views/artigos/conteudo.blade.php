@@ -66,8 +66,6 @@
                         <div class="card-page">
                             <h5 class="fg-primary">Artigo</h5>
 
-
-
                             @if(isset($errors) && count($errors)>0)
                             <div class="text-center alert-danger">
                                 @foreach($errors->all() as $erro)
@@ -127,7 +125,7 @@
 
                                     <div class="form-group t-10">
                                         <label class="control-label col-sm-2" for="estados">Estados:</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-10" tabindex="0" id="tabelaEstados">
                                             <table class="table table-borderless table-responsive-sm">
                                                 <tbody>
                                                     <tr>
@@ -240,25 +238,20 @@
                                         </div>
                                     </div>
 
-
                                     <br>
 
                                     <div class="row justify-content-center">
                                         <div class="col-lg-4 py-4">
                                             <div class="team-item">
-                                                <button type="submit" class="btn btn-primary rounded-pill">⠀⠀Salvar⠀⠀
+                                                <button type="submit" class="btn btn-primary rounded-pill" id="btnSalvar">⠀⠀Salvar⠀⠀
                                                 </button>
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
-
                                 </form>
                         </div>
-
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -266,28 +259,43 @@
 </main>
 
 <script type="text/javascript">
-function onChangeText() {
-    let string = document.getElementById("doi").value
-    document.getElementById("doiDiv").style.visibility = "visible";
-    document.getElementById("doiUrl").value = "https://doi.org/" + string;
-}
+    function onChangeText() {
+        let string = document.getElementById("doi").value
+        document.getElementById("doiDiv").style.visibility = "visible";
+        document.getElementById("doiUrl").value = "https://doi.org/" + string;
+    }
 
-let estadosRecebidos = `<?php isset($artigo) ?
-                    $estados = implode(',' , $artigo['state']) : $estados = ''; echo $estados;?>`;
-if (estadosRecebidos != '') {
-    let estados = document.getElementsByName('estados[]');
-    for (let i = 0; i < estados.length; i++) {
-        if (estadosRecebidos.includes(estados[i].value)) {
-            estados[i].checked = true;
+    let estadosRecebidos = `<?php isset($artigo) ?
+                        $estados = implode(',' , $artigo['state']) : $estados = ''; echo $estados;?>`;
+    if (estadosRecebidos != '') {
+        let estados = document.getElementsByName('estados[]');
+        for (let i = 0; i < estados.length; i++) {
+            if (estadosRecebidos.includes(estados[i].value)) {
+                estados[i].checked = true;
+            }
         }
     }
-}
 
-let doiString = document.getElementById("doi").value
+    let doiString = document.getElementById("doi").value
 
-if (doiString !== '') {
-    onChangeText()
-}
+    if (doiString !== '') {
+        onChangeText()
+    }
+
+    document.getElementById('btnSalvar').addEventListener('click', (event) => {
+        let checkBoxInputs = document.getElementsByName('estados[]')
+        let selected = 0
+        checkBoxInputs.forEach(a => {
+            if(a.checked){
+                selected++
+            }
+        })
+        if(selected < 1){
+            document.getElementById('tabelaEstados').focus()
+            alert("Você deve selecionar algum estado!")
+            event.preventDefault()
+        }
+    })
 </script>
 
 @endsection

@@ -82,7 +82,6 @@
                                             </td>
                                         </tr>
                                         @empty
-                                        <tr>ERRO NO SERVIDOR</tr>
                                         @endforelse
                                     </tbody>
                                 </table>
