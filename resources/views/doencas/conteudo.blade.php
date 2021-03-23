@@ -189,7 +189,7 @@
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" id="transmission"
                                                 name="transmission" placeholder="Digite a transmissão"
-                                                value="{{$doenca['transmission'] ?? ''}}">
+                                                value="{{$doenca['transmission'] ?? ''}}" required>
                                         </div>
                                     </div>
 
@@ -199,7 +199,7 @@
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" id="clinicalManifestation"
                                                 name="clinicalManifestation" placeholder="Digite a manifestação clinica"
-                                                value="{{$doenca['clinicalManifestation'] ?? ''}}">
+                                                value="{{$doenca['clinicalManifestation'] ?? ''}}" required>
                                         </div>
                                     </div>
 
@@ -208,7 +208,7 @@
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" id="complications"
                                                 name="complications" placeholder="Digite as complicações"
-                                                value="{{$doenca['complications'] ?? ''}}">
+                                                value="{{$doenca['complications'] ?? ''}}" required>
                                         </div>
                                     </div>
 
@@ -217,14 +217,14 @@
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" id="distribution"
                                                 name="distribution" placeholder="Digite a distribuição"
-                                                value="{{$doenca['distribution'] ?? ''}}">
+                                                value="{{$doenca['distribution'] ?? ''}}" required>
                                         </div>
                                     </div>
 
 
                                     <div class="form-group t-10">
                                         <label class="control-label col-sm-2" for="estados">Estados:</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-10" tabindex="0" id="tabelaEstados">
                                             <table class="table table-borderless table-responsive-sm">
                                                 <tbody>
                                                     <tr>
@@ -342,7 +342,7 @@
                                     <div class="row justify-content-center">
                                         <div class="col-lg-4 py-4">
                                             <div class="team-item">
-                                                <button type="submit" class="btn btn-primary rounded-pill">⠀⠀Salvar⠀⠀
+                                                <button type="submit" class="btn btn-primary rounded-pill" id="btnSalvar">⠀⠀Salvar⠀⠀
                                                 </button>
                                                 </a>
                                             </div>
@@ -350,7 +350,6 @@
                                     </div>
                                 </form>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -451,6 +450,26 @@
             }
         }
 }
+
+    document.getElementById('btnSalvar').addEventListener('click', (event) => {
+        let checkBoxInputs = document.getElementsByName('estados[]')
+        let tableElements = document.getElementById('tableUL').childElementCount
+        let selected = 0
+        checkBoxInputs.forEach(a => {
+            if(a.checked){
+                selected++
+            }
+        })
+        if(tableElements < 1){
+            document.getElementById('myInput').focus()
+            alert("Você deve adicionar algum vetor!")
+            event.preventDefault()
+        }else if(selected < 1){
+            document.getElementById('tabelaEstados').focus()
+            alert("Você deve selecionar algum estado!")
+            event.preventDefault()
+        }
+    })
 </script>
 
 @endsection
