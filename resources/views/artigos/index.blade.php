@@ -49,7 +49,9 @@
 
                         <div class="card-page">
                             <h5 class="fg-primary">Todos os Artigos</h5>
-
+                            <div class="container d-flex flex-row-reverse">
+                                <div id="pagination-wrapper"></div>
+                            </div>
                             <div class="container">
                                 @csrf
                                 <!-- Tabela com os usuários -->
@@ -61,26 +63,8 @@
                                             <th>Doença</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        @foreach($artigos as $artigo)
-                                        <tr>
-                                            <th scope="row">{{$artigo['doi']}}</th>
-                                            <td>{{$artigo['name']}}</td>
-                                            <td>{{$artigo['disease']}}</td>
-                                            <td>
-                                                <button type="button" class="btn btn-danger rounded-pill fas fa-trash"
-                                                    data-toggle="modal" data-toggle="modal" data-target="#excluirPopUp"
-                                                    data-id={{$artigo['_id']}}>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <a href="{{url('artigos/'.$artigo['_id'].'/edit')}}"
-                                                    style="text-decoration:none">
-                                                    <button type="button"
-                                                        class="btn btn-primary rounded-pill fas fa-edit"></button>
-                                                </a>
-                                        </tr>
-                                        @endforeach
+                                    <tbody id="table-body">
+
                                     </tbody>
                                 </table>
                             </div>
@@ -139,5 +123,117 @@
         </div>
     </div>
 </main>
+<script>
+//Recebendo dador do PHP
+<?php
+    $artigosJson;
+    isset($artigos) ? $artigosJson = json_encode($artigos) : $artigosJson = [];?>
+let artigos = <?php echo $artigosJson?>;
+var state = {
+    'querySet': artigos,
 
+    'page': 1,
+    'rows': 5,
+    'window': 5,
+}
+
+buildTable()
+
+function pagination(querySet, page, rows) {
+
+    var trimStart = (page - 1) * rows
+    var trimEnd = trimStart + rows
+    var trimmedData = querySet.slice(trimStart, trimEnd)
+    var pages = Math.round(querySet.length / rows);
+
+    return {
+        'querySet': trimmedData,
+        'pages': pages,
+    }
+}
+
+function pageButtons(pages) {
+    var wrapper = document.getElementById('pagination-wrapper')
+
+    wrapper.innerHTML = ``
+
+    var maxLeft = (state.page - Math.floor(state.window / 2))
+    var maxRight = (state.page + Math.floor(state.window / 2))
+
+    if (maxLeft < 1) {
+        maxLeft = 1
+        maxRight = state.window
+    }
+
+    if (maxRight > pages) {
+        maxLeft = pages - (state.window - 1)
+
+        if (maxLeft < 1) {
+            maxLeft = 1
+        }
+        maxRight = pages
+    }
+
+
+
+    for (var page = maxLeft; page <= maxRight; page++) {
+        let btnClass = "btn-primary";
+        if (state.page == page) {
+            btnClass = "btn-light";
+        }
+        wrapper.innerHTML += `<button value=${page} class="page btn ${btnClass} rounded-pill">${page}</button>`
+    }
+
+    if (state.page != 1) {
+        wrapper.innerHTML = `<button value=${1} class="page btn btn-primary rounded-pill">&#171; Inicio</button>` +
+            wrapper
+            .innerHTML
+    }
+
+    if (state.page != pages) {
+        wrapper.innerHTML += `<button value=${pages} class="page btn btn-primary rounded-pill">Fim &#187;</button>`
+    }
+
+    $('.page').on('click', function() {
+        $('#table-body').empty()
+
+        state.page = Number($(this).val())
+
+        buildTable()
+    })
+
+}
+
+
+function buildTable() {
+    let table = $('#table-body')
+    let ref = "<?php echo url('artigos/') ?>";
+    let data = pagination(state.querySet, state.page, state.rows);
+    let myList = data.querySet;
+
+    for (var i = 0 in myList) {
+        //Keep in mind we are using "Template Litterals to create rows"
+        let row = `<tr>
+        <th scope="row">${myList[i].doi}</th>
+        <td>${myList[i].name}</td>
+        <td>${myList[i].disease}</td>
+        <td>
+            <button type="button" class="btn btn-danger rounded-pill fas fa-trash" 
+                data-toggle="modal" data-target="#excluirPopUp"
+                data-id=${myList[i]._id}></button>
+        </td>
+        <td>
+            <a href="${ref}${myList.id}/edit"
+                style="text-decoration:none">
+                <button type="button"
+                    class="btn btn-primary rounded-pill fas fa-edit"></button>
+            </a>
+        </td>
+              `
+        table.append(row)
+    }
+
+    pageButtons(data.pages)
+}
+</script>
 @endsection
