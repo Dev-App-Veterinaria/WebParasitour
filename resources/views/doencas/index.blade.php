@@ -217,7 +217,7 @@ function buildTable() {
     let data = pagination(state.querySet, state.page, state.rows);
     let myList = data.querySet;
 
-    for (var i = 0 in myList) {
+    for (var i in myList) {
         //Keep in mind we are using "Template Litterals to create rows"
         let row = `<tr>
         <td>${myList[i].scientificName}</td>
@@ -230,7 +230,7 @@ function buildTable() {
                 data-id=${myList[i]._id}></button>
         </td>
         <td>
-            <a href="${ref}${myList.id}/edit"
+            <a href="${ref}/${myList[i]._id}/edit"
                 style="text-decoration:none">
                 <button type="button"
                     class="btn btn-primary rounded-pill fas fa-edit"></button>

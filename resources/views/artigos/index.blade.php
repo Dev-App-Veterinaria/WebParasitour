@@ -223,7 +223,7 @@ function buildTable() {
                 data-id=${myList[i]._id}></button>
         </td>
         <td>
-            <a href="${ref}${myList.id}/edit"
+            <a href="${ref}/${myList[i]._id}/edit"
                 style="text-decoration:none">
                 <button type="button"
                     class="btn btn-primary rounded-pill fas fa-edit"></button>
