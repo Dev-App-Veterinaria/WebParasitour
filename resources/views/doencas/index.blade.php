@@ -48,13 +48,11 @@
         </div>
     </div>
 
-    <div class="page-section pt-5">
+    <div class="page-section pt-0">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col">
-
-                    <div class="card-page mt-2">
-
+                    <div class="card-page">
                         <div class="card-page">
                             <h5 class="fg-primary">Todas as Doenças</h5>
 
@@ -133,7 +131,7 @@
 //Recebendo dador do PHP
 <?php
     $doencasJson;
-    isset($doencas) ? $doencasJson = json_encode($doencas) : $doencasJson = [];?>
+    isset($doencas) ? $doencasJson = json_encode($doencas) : $doencasJson = '';?>
 let doencas = <?php echo $doencasJson?>;
 var state = {
     'querySet': doencas,

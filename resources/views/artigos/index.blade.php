@@ -40,12 +40,12 @@
         </div>
     </div>
 
-    <div class="page-section pt-5">
+    <div class="page-section pt-0">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col">
 
-                    <div class="card-page mt-2">
+                    <div class="card-page">
 
                         <div class="card-page">
                             <h5 class="fg-primary">Todos os Artigos</h5>
@@ -127,7 +127,7 @@
 //Recebendo dador do PHP
 <?php
     $artigosJson;
-    isset($artigos) ? $artigosJson = json_encode($artigos) : $artigosJson = [];?>
+    isset($artigos) ? $artigosJson = json_encode($artigos) : $artigosJson = '';?>
 let artigos = <?php echo $artigosJson?>;
 var state = {
     'querySet': artigos,
