@@ -44,3 +44,4 @@ Route::get('/doencas/{id}', [DoencaController::class, 'destroy'])->name('doencas
 
 Route::get('/login',[UsuarioController::class, 'index'])->name('usuario.index');
 Route::post('/login',[UsuarioController::class, 'login'])->name('usuario.login');
+Route::get('/logout',[UsuarioController::class, 'logout'])->name('usuario.logout');

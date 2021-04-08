@@ -42,6 +42,11 @@ class UsuarioController extends Controller
         return redirect('/');
     }
 
+    function logout(){
+        session()->forget('token');
+        return redirect('/');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
