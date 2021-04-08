@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtigoController;
 use App\Http\Controllers\DoencaController;
+use App\Http\Controllers\UsuarioController;
 
 
 /*
@@ -40,3 +41,6 @@ Route::get('/doencas/{id}/edit', [DoencaController::class, 'edit'])->name('doenc
 Route::put('/doencas/{id}/edit', [DoencaController::class, 'update'])->name('doencas.update');
 
 Route::get('/doencas/{id}', [DoencaController::class, 'destroy'])->name('doencas.destroy');
+
+Route::get('/login',[UsuarioController::class, 'index'])->name('usuario.index');
+Route::post('/login',[UsuarioController::class, 'login'])->name('usuario.login');

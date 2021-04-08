@@ -1,20 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Http;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
-class ArtigoController extends Controller
+class UsuarioController extends Controller
 {
+
     private $server;
 
     public function __construct()
     {
-
-        $this->server = 'http://localhost:3002/api/article/';
-        
-
+        $this->server = 'http://localhost:3002/api/user/';
     }
     /**
      * Display a listing of the resource.
@@ -23,10 +21,25 @@ class ArtigoController extends Controller
      */
     public function index()
     {
-        $response = Http::get($this->server);
-        $artigos = $response->json();
+        return view('usuarios.index');
+    }
 
-        return view('artigos/index', ['artigos'=>$artigos]);
+    public function login(Request $request)
+    {
+        $user = [
+            'name' => 'admin',
+            'email' => $request->email,
+            'password' =>  $request->password,
+        ];
+
+        $answer = Http::post($this->server."login", $user);
+        if($answer->ok())
+        {
+            $response = $answer->json();
+            session(['token' => $response["token"]]);
+        }
+
+        return redirect('/');
     }
 
     /**
@@ -36,7 +49,7 @@ class ArtigoController extends Controller
      */
     public function create()
     {
-        return view('artigos/conteudo');
+        //
     }
 
     /**
@@ -47,19 +60,7 @@ class ArtigoController extends Controller
      */
     public function store(Request $request)
     {
-        $cadastro = [
-            'name' => $request->input('nome'),
-            'doi' => $request->input('doi'),
-            'citation' => $request->input('citacao'),
-            'disease' => $request->input('doenca'),
-            'state' => $request->input('estados'),
-        ];
-
-        Http::post($this->server, $cadastro);
-
-        if($cadastro){
-            return redirect('/artigos');
-        }
+        //
     }
 
     /**
@@ -81,9 +82,7 @@ class ArtigoController extends Controller
      */
     public function edit($id)
     {
-        $artigo = Http::get($this->server.$id);
-
-        return view('artigos/conteudo', ['artigo' => $artigo]);
+        //
     }
 
     /**
@@ -95,17 +94,7 @@ class ArtigoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $artigo = [
-            'name' => $request->input('nome'),
-            'doi' => $request->input('doi'),
-            'citation' => $request->input('citacao'),
-            'disease' => $request->input('doenca'),
-            'state' => $request->input('estados'),
-        ];
-
-        Http::put($this->server.$id, $artigo);
-
-        return redirect('/artigos');
+        //
     }
 
     /**
@@ -116,7 +105,6 @@ class ArtigoController extends Controller
      */
     public function destroy($id)
     {
-        Http::delete($this->server.$id);
-        return redirect('/artigos');
+        //
     }
 }
