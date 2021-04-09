@@ -12,7 +12,8 @@ class DoencaController extends Controller
 
     public function __construct()
     {
-        $this->server = 'http://localhost:3001/api/disease/';
+        $this->server = 'http://localhost:3002/api/disease/';
+        $this->middleware('check.session');
     }
     /**
      * Display a listing of the resource.
@@ -48,7 +49,10 @@ class DoencaController extends Controller
      */
     public function store(Request $request)
     {
-        $doencas = Http::post( 'localhost:3001/api/disease/', [
+        $token = session('token', '');
+        $doencas = Http::withHeaders([
+            'token' => "Bearer $token",
+        ])->post( 'localhost:3002/api/disease/', [
             'name' => $request->nome,
             'etiologicalAgent' =>  $request->etiologicalAgent,
             'scientificName' =>  $request->scientificName,
@@ -60,6 +64,10 @@ class DoencaController extends Controller
             'distribution' =>  $request->distribution,
             'states' =>  $request->estados,
         ]);
+        $status = $doencas->status(); 
+        if($status == 401){
+            session()->forget('token');
+        }
 
         return redirect('/doencas');
     }

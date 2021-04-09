@@ -15,11 +15,18 @@
         <div class="container h-100">
             <div class="row align-items-center h-100">
                 <div class="col-lg-6 wow fadeInUp">
-                    <h1 class="mb-4">Gerencie seus<br>dados aqui!</h1>
-                    <p class="mb-4">Escolha abaixo a categoria do APP que você deseja gerenciar.</p>
-                    <div style="width: 150px;">
+                    @if(session()->has('token'))
+                        <h1 class="mb-4">Gerencie seus<br>dados aqui!</h1>
+                        <p class="mb-4">Escolha abaixo a categoria do APP que você deseja gerenciar.</p>
+                        <div style="width: 150px;">
                         <a href="/doencas" class="btn btn-primary rounded-pill btn-block">Doenças</a>
                         <a href="/artigos" class="btn btn-primary rounded-pill btn-block">Artigos</a>
+                    @else
+                        <h1 class="mb-4">Entre para<br> gerenciar os dados!</h1>
+                        <div style="width: 150px;">
+                        <a href="/login" class="btn btn-primary rounded-pill btn-block">Login</a>
+                    @endif
+                        
                     </div>
 
                 </div>
