@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
+    <style>
+        .rounded-pill {
+            border-radius: 50rem !important;
+        }
+    
+        .padding {
+            margin-top: 5px;
+        }
+    </style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +16,33 @@
     <meta name="description" content="Mobile Application HTML5 Template">
     <meta name="copyright" content="MACode ID, https://www.macodeid.com/">
     <title>Parasitour</title>
-    <link rel="shortcut icon" href="../assets/favicon.png" type="image/x-icon">
-    <!-- Imports de estilo do template -->
+    
+    <link rel="shortcut icon" href="../assets/vendor/favicon.png" type="image/x-icon">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="assets/img/icons/favicon.ico"/>
+<!--===============================================================================================-->
+<link
+        rel="stylesheet"
+        href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+        integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V"
+        crossorigin="anonymous"
+    />
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="assets/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/css/util.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+<!--===============================================================================================-->
+	<script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+        <script src="assets/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+        <script src="assets/vendor/tilt/tilt.jquery.min.js"></script>
+         <!-- Imports de estilo do template -->
     <link rel="stylesheet" href="/assets/css/maicons.css">
     <link rel="stylesheet" href="/assets/vendor/animate/animate.css">
     <link rel="stylesheet" href="/assets/vendor/owl-carousel/css/owl.carousel.min.css">
@@ -31,8 +64,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+    
 </head>
-
 <body>
     @yield('conteudo')
         <!-- Créditos -->
@@ -62,5 +95,4 @@
         </div>
     </div>
 </body>
-
 </html>
