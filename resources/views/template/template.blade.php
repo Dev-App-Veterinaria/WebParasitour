@@ -31,9 +31,68 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+    <style>
+        #btn-logout {
+            width: 100%;
+            padding: 3px 20px !important;
+            text-align: left !important;
+            font-family: 'Quicksand', Arial, Helvetica, sans-serif;
+            background: rgb(255 255 255 / 15%);
+            color: #fff;
+        }
+        #btn-logout:hover {
+            color: #9077fc;
+            background: rgb(255 255 255 / 80%);
+        }
+    </style>
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-floating">
+    @if(Session::has('token'))
+        <div class="container">
+            @if(Request::is('/'))
+                <a class="navbar-brand" href="/">
+                    <img src="/assets/favicon2.png" alt="" width="30%">
+                </a>
+            @else
+                <a class="navbar-brand" href="/">
+                    <img src="/assets/favicon3.png" alt="" width="40%">
+                </a>
+            @endif
+            <div class="collapse navbar-collapse" id="navbarToggler">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <?php 
+                        $classesDoencas= "nav-item";
+                        $classesArtigos= "nav-item";
+                        if(str_contains(Request::url(), "doencas")){
+                            $classesDoencas .= " active" ;
+                        }
+                        if(str_contains(Request::url(), "artigos")){
+                            $classesArtigos .= " active" ;
+                        }
+                    ?>
+                    <li class="<?php echo $classesDoencas ?>">
+                        <a class="nav-link" href="/doencas">
+                    <h5>Doenças</h5>
+                    </a>
+                    </li>
+                    <li class="<?php echo $classesArtigos ?>">
+                        <a class="nav-link" href="/artigos">
+                            <h5>Artigos</h5>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="/logout" class="nav-link">
+                            <button type="button" id="btn-logout" class="btn">Sair</button>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    @endif
+    </nav>
+    <!-- Conteúdo das telas que estendem o template -->
     @yield('conteudo')
         <!-- Créditos -->
         <div class="page-footer-section bg-dark fg-white">
