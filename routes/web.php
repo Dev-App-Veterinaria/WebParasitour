@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtigoController;
 use App\Http\Controllers\DoencaController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\UsuariosController;
 
 
 /*
@@ -42,6 +43,20 @@ Route::put('/doencas/{id}/edit', [DoencaController::class, 'update'])->name('doe
 
 Route::get('/doencas/{id}', [DoencaController::class, 'destroy'])->name('doencas.destroy');
 
+//Rotas do login
 Route::get('/login',[UsuarioController::class, 'index'])->name('usuario.index');
+
 Route::post('/login',[UsuarioController::class, 'login'])->name('usuario.login');
+
 Route::get('/logout',[UsuarioController::class, 'logout'])->name('usuario.logout');
+
+//Rotas de usuarios
+Route::get('/usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
+
+Route::get('/usuarios/create', [UsuariosController::class, 'create'])->name('usuarios.create');
+Route::post('/usuarios/create', [UsuariosController::class, 'store'])->name('usuarios.store');
+
+Route::get('/usuarios/{id}/edit', [UsuariosController::class, 'edit'])->name('usuarios.edit');
+Route::put('/usuarios/{id}/edit', [UsuariosController::class, 'update'])->name('usuarios.update');
+
+Route::get('/usuarios/{id}', [UsuariosController::class, 'destroy'])->name('usuarios.destroy');

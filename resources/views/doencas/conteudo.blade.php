@@ -75,6 +75,11 @@
                         <h5>Artigos</h5>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/usuarios">
+                        <h5>Usuários</h5>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

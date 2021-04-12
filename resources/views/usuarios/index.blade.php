@@ -46,7 +46,7 @@
             <div class="container fg-white h-100">
                 <div class="row justify-content-center align-items-center text-center h-100">
                     <div class="col-lg-6">
-                        <h1 class="mb-4 fw-bold">Doenças</h1>
+                        <h1 class="mb-4 fw-bold">Usuários</h1>
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                 <div class="col">
                     <div class="card-page">
                         <div class="card-page">
-                            <h5 class="fg-primary">Todas as Doenças</h5>
+                            <h5 class="fg-primary">Todas os Usuários</h5>
 
                             <div class="container d-flex flex-row-reverse">
                                 <div id="pagination-wrapper"></div>
@@ -69,10 +69,8 @@
                                 <table class="table table-striped table-responsive-sm">
                                     <thead>
                                         <tr>
-                                            <th>Nome Cientifico</th>
-                                            <th>Nome Popular</th>
-                                            <th>Agente Etiológico</th>
-                                            <th>Transmissão</th>
+                                            <th>Nome</th>
+                                            <th>Email</th>
                                         </tr>
                                     </thead>
                                     <tbody id="table-body">
@@ -84,8 +82,8 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-4 py-4">
                                     <div class="team-item">
-                                        <a href="{{url('doencas/create')}}" style="text-decoration:none">
-                                            <button class="btn btn-primary rounded-pill">Adicionar Doença</button>
+                                        <a href="{{url('usuarios/create')}}" style="text-decoration:none">
+                                            <button class="btn btn-primary rounded-pill">Adicionar Usuário</button>
                                         </a>
                                     </div>
                                 </div>
@@ -96,18 +94,18 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="modal-title">Excluir doença</h4>
+                                            <h4 class="modal-title">Excluir usuário</h4>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
                                         <div class="modal-body">
-                                            <p>Tem certeza que você deseja excluir essa doença?</p>
+                                            <p>Tem certeza que você deseja excluir esse usuário?</p>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-light rounded-pill"
                                                 data-dismiss="modal">Cancelar</button>
                                             <a class="botaoExcluir" style="text-decoration:none">
                                                 <button type="button" class="btn btn-danger rounded-pill">Excluir
-                                                    doença</button>
+                                                    usuário</button>
                                             </a>
                                         </div>
                                     </div>
@@ -119,7 +117,7 @@
                                 var button = $(event.relatedTarget) // Botão que acionou o modal
                                 var recipient = button.data('id') // Extrai informação do atributos data-*
                                 var modal = $(this)
-                                var url = 'doencas/' + recipient
+                                var url = 'usuarios/' + recipient
                                 modal.find('.botaoExcluir').attr('href', url)
                             })
                             </script>
@@ -134,13 +132,10 @@
 </main>
 <script>
 //Recebendo dador do PHP
-<?php
-    $doencasJson;
-    isset($doencas) ? $doencasJson = json_encode($doencas) : $doencasJson = '';?>
-let doencas = <?php echo $doencasJson?>;
+<?php isset($usuarios) ? $usuariosJson = json_encode($usuarios) : $usuariosJson = '';?>
+let usuarios = <?php echo $usuariosJson?>;
 var state = {
-    'querySet': doencas,
-
+    'querySet': usuarios,
     'page': 1,
     'rows': 5,
     'window': 5,
@@ -216,17 +211,15 @@ function pageButtons(pages) {
 
 function buildTable() {
     let table = $('#table-body')
-    let ref = "<?php echo url('doencas/') ?>";
+    let ref = "<?php echo url('usuarios/') ?>";
     let data = pagination(state.querySet, state.page, state.rows);
     let myList = data.querySet;
 
     for (var i in myList) {
         //Keep in mind we are using "Template Litterals to create rows"
         let row = `<tr>
-        <td>${myList[i].scientificName}</td>
         <td>${myList[i].name}</td>
-        <td>${myList[i].etiologicalAgent}</td>
-        <td>${myList[i].transmission}</td>
+        <td>${myList[i].email}</td>
         <td>
             <button type="button" class="btn btn-danger rounded-pill fas fa-trash" 
                 data-toggle="modal" data-target="#excluirPopUp"
