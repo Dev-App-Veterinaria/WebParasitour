@@ -8,6 +8,7 @@
 }
 </style>
 
+<<<<<<< HEAD
 <nav class="navbar navbar-expand-lg navbar-dark navbar-floating">
     <div class="container">
         <a class="navbar-brand" href="/">
@@ -47,8 +48,9 @@
     </div>
 </nav>
 
+=======
+>>>>>>> upstream/main
 <main class="bg-light">
-
     <div class="page-hero-section bg-image hero-mini" style="background-image: url(/assets/img/hero_mini.svg);">
         <div class="hero-caption">
             <div class="container fg-white h-100">
@@ -60,7 +62,6 @@
             </div>
         </div>
     </div>
-
     <div class="page-section">
         <div class="container">
             <div class="row justify-content-center">

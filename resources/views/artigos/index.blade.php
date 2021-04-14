@@ -2,6 +2,7 @@
 
 @section('conteudo')
 
+<<<<<<< HEAD
 
 <nav class="navbar navbar-expand-lg navbar-dark navbar-floating">
     <div class="container">
@@ -31,6 +32,8 @@
     </div>
 </nav>
 
+=======
+>>>>>>> upstream/main
 <main class="bg-light">
 
     <div class="page-hero-section bg-image hero-mini" style="background-image: url(../assets/img/hero_mini.svg);">

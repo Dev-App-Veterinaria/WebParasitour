@@ -1,15 +1,6 @@
 @extends('template.template')
 
 @section('conteudo')
-
-<!-- Barra superior -->
-<nav class="navbar navbar-expand-lg navbar-light navbar-floating">
-    <div class="container">
-        <img src="/assets/favicon2.png" alt="" width="30%">
-    </div>
-</nav>
-
-<!-- Corpo -->
 <div class="page-hero-section bg-image hero-home-1" style="background-image: url(/assets/img/bg_hero_1.svg);">
     <div class="hero-caption pt-5">
         <div class="container h-100">
