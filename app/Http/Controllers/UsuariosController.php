@@ -28,6 +28,11 @@ class UsuariosController extends Controller
             'token' => "Bearer $token",
         ])->get($this->server)->json();
 
+        if(isset($usuarios['error'])){
+            session()->forget('token');
+            return redirect("/login");
+        }
+
         return view('usuarios.index', ['usuarios'=>$usuarios]);
     }
 
@@ -59,9 +64,7 @@ class UsuariosController extends Controller
             'email' =>  $request->email,
         ]);
 
-        $status = $usuarios->status();
-
-        if($status == 401){
+        if(isset($usuarios['error'])){
             session()->forget('token');
         }
 
@@ -93,6 +96,11 @@ class UsuariosController extends Controller
             'token' => "Bearer $token",
         ])->get( $this->server.$id)->json();
 
+        if(isset($usuario['error'])){
+            session()->forget('token');
+            return redirect('/login');
+        }
+
         return view('usuarios/conteudo', ['usuario' => $usuario]);
     }
 
@@ -113,9 +121,13 @@ class UsuariosController extends Controller
             'email' =>  $request->email,
         ];
 
-        Http::withHeaders([
+        $result =  Http::withHeaders([
             'token' => "Bearer $token",
         ])->put( $this->server.$id, $usuario);
+
+        if($result->status() == 401){
+            session()->forget('token');
+        }
 
         return redirect('/usuarios');
     }
@@ -129,9 +141,13 @@ class UsuariosController extends Controller
     public function destroy($id)
     {
         $token = session('token', '');
-        Http::withHeaders([
+        $result = Http::withHeaders([
             'token' => "Bearer $token",
         ])->delete( $this->server.$id);
+
+        if($result->status()  == 401){
+            session()->forget('token');
+        }
 
         return redirect('/usuarios');
     }

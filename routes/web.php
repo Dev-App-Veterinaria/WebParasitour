@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtigoController;
 use App\Http\Controllers\DoencaController;
-use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsuariosController;
 
 
@@ -44,11 +44,11 @@ Route::put('/doencas/{id}/edit', [DoencaController::class, 'update'])->name('doe
 Route::get('/doencas/{id}', [DoencaController::class, 'destroy'])->name('doencas.destroy');
 
 //Rotas do login
-Route::get('/login',[UsuarioController::class, 'index'])->name('usuario.index');
+Route::get('/login',[LoginController::class, 'index'])->name('usuario.index');
 
-Route::post('/login',[UsuarioController::class, 'login'])->name('usuario.login');
+Route::post('/login',[LoginController::class, 'login'])->name('usuario.login');
 
-Route::get('/logout',[UsuarioController::class, 'logout'])->name('usuario.logout');
+Route::get('/logout',[LoginController::class, 'logout'])->name('usuario.logout');
 
 //Rotas de usuarios
 Route::get('/usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');

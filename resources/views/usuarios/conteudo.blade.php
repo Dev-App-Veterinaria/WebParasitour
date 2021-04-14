@@ -75,7 +75,7 @@
                             @if(isset($usuario))
                                 <form class="form-group" action name="edit" id="create" method="post"
                                     action="{{url('usuarios.update')}}">
-                                    @method('PUT')
+                                @method('PUT')
                             @else
                                 <form class="form-group" action name="create" id="create" method="post"
                                     action="{{url('usuarios.store')}}">
