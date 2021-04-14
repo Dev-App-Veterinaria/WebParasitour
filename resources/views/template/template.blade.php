@@ -65,11 +65,15 @@
                     <?php 
                         $classesDoencas= "nav-item";
                         $classesArtigos= "nav-item";
+                        $classesUsuarios = "nav-item";
                         if(str_contains(Request::url(), "doencas")){
                             $classesDoencas .= " active" ;
                         }
                         if(str_contains(Request::url(), "artigos")){
                             $classesArtigos .= " active" ;
+                        }
+                        if(str_contains(Request::url(), "usuarios")){
+                            $classesUsuarios .= " active" ;
                         }
                     ?>
                     <li class="<?php echo $classesDoencas ?>">
@@ -80,6 +84,11 @@
                     <li class="<?php echo $classesArtigos ?>">
                         <a class="nav-link" href="/artigos">
                             <h5>Artigos</h5>
+                        </a>
+                    </li>
+                    <li class="<?php echo $classesUsuarios ?>">
+                        <a class="nav-link" href="/usuarios">
+                            <h5>Usuários</h5>
                         </a>
                     </li>
                     <li class="nav-item active">
