@@ -8,42 +8,7 @@
 }
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-dark navbar-floating">
-    <div class="container">
-        <a class="navbar-brand" href="/">
-            <img src="/assets/favicon3.png" alt="" width="40%">
-        </a>
-
-        <div class="collapse navbar-collapse" id="navbarToggler">
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                <li class="nav-item ">
-                    <a class="nav-link" href="/doencas">
-                        <h5>Doenças</h5>
-                    </a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/artigos">
-                        <h5>Artigos</h5>
-                    </a>
-                </li>
-            </ul>
-
-            <div class="col-sm-5">
-                <ul class="lista" id="myUL">
-                    @if(isset($doenca))
-                    @foreach( $doenca['vector'] as $vector)
-                    <li><input class="form-control" name="vector[]" value="{{$vector ?? ''}}"></li>
-                    @endforeach
-                    @endif
-                </ul>
-            </div>
-
-        </div>
-    </div>
-</nav>
-
 <main class="bg-light">
-
     <div class="page-hero-section bg-image hero-mini" style="background-image: url(/assets/img/hero_mini.svg);">
         <div class="hero-caption">
             <div class="container fg-white h-100">
@@ -55,7 +20,6 @@
             </div>
         </div>
     </div>
-
     <div class="page-section">
         <div class="container">
             <div class="row justify-content-center">
