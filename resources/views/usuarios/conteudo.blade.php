@@ -27,31 +27,13 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col">
-
                     <div class="card-page mt-2">
-
                         <div class="card-page">
                             <h5 class="fg-primary">Usuário</h5>
-
                             </style>
 
-
-                            @if(isset($errors) && count($errors)>0)
-                            <div class="text-center alert-danger">
-                                @foreach($errors->all() as $erro)
-                                {{$erro}}<br>
-                                @endforeach
-                            </div>
-                            @endif
-
-                            @if(isset($usuario))
-                                <form class="form-group" action name="edit" id="create" method="post"
-                                    action="{{url('usuarios.update')}}">
-                                @method('PUT')
-                            @else
-                                <form class="form-group" action name="create" id="create" method="post"
-                                    action="{{url('usuarios.store')}}">
-                            @endif
+                            <form class="form-group" action name="edit" id="create" method="post">
+                            @method('PUT')
                             @csrf
                             <div class="form-group">
                                 <label class="form-control-label col-sm-2" for="name">Nome:</label>
