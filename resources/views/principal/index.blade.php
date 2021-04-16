@@ -13,7 +13,7 @@
                         <div style="width: 150px;">
                         <a href="/doencas" class="btn btn-primary rounded-pill btn-block">Doenças</a>
                         <a href="/artigos" class="btn btn-primary rounded-pill btn-block">Artigos</a>
-                        <a href="/usuarios" class="btn btn-primary rounded-pill btn-block">Usuários</a>
+                        <a href="/usuario" class="btn btn-primary rounded-pill btn-block">Usuários</a>
                     @else
                         <h1 class="mb-4">Entre para<br> gerenciar os dados!</h1>
                         <div style="width: 150px;">
