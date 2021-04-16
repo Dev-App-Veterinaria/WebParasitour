@@ -87,8 +87,8 @@
                         </a>
                     </li>
                     <li class="<?php echo $classesUsuarios ?>">
-                        <a class="nav-link" href="/usuarios">
-                            <h5>Usuários</h5>
+                        <a class="nav-link" href="/usuario">
+                            <h5>Usuário</h5>
                         </a>
                     </li>
                     <li class="nav-item active">

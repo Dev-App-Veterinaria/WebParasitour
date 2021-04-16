@@ -15,61 +15,6 @@ class UsuariosController extends Controller
         $this->middleware('check.session');
 
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $token = session('token', '');
-
-        $usuarios = Http::withHeaders([
-            'token' => "Bearer $token",
-        ])->get($this->server)->json();
-
-        if(isset($usuarios['error'])){
-            session()->forget('token');
-            return redirect("/login");
-        }
-
-        return view('usuarios.index', ['usuarios'=>$usuarios]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('usuarios.conteudo');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $token = session('token', '');
-
-        $usuarios = Http::withHeaders([
-            'token' => "Bearer $token",
-        ])->post( $this->server, [
-            'name' => $request->name,
-            'password' =>  $request->password,
-            'email' =>  $request->email,
-        ]);
-
-        if(isset($usuarios['error'])){
-            session()->forget('token');
-        }
-
-        return redirect('/usuarios');
-    }
 
     /**
      * Display the specified resource.
@@ -77,28 +22,18 @@ class UsuariosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function show()
     {
         $token = session('token', '');
+        $id = session('user_id', '');
 
         $usuario = Http::withHeaders([
             'token' => "Bearer $token",
-        ])->get( $this->server.$id)->json();
+        ])->get($this->server.$id)->json();
 
         if(isset($usuario['error'])){
             session()->forget('token');
-            return redirect('/login');
+            return redirect("/login");
         }
 
         return view('usuarios/conteudo', ['usuario' => $usuario]);
@@ -108,12 +43,12 @@ class UsuariosController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $token = session('token', '');
+        $id = session('user_id', '');
 
         $usuario = [
             'name' => $request->name,
@@ -129,26 +64,7 @@ class UsuariosController extends Controller
             session()->forget('token');
         }
 
-        return redirect('/usuarios');
+        return redirect('/');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $token = session('token', '');
-        $result = Http::withHeaders([
-            'token' => "Bearer $token",
-        ])->delete( $this->server.$id);
-
-        if($result->status()  == 401){
-            session()->forget('token');
-        }
-
-        return redirect('/usuarios');
-    }
 }

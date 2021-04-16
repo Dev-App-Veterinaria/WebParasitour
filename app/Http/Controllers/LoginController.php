@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Redirect;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\MessageBag;
 
 class LoginController extends Controller
 {
@@ -27,7 +30,6 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $user = [
-            'name' => 'admin',
             'email' => $request->email,
             'password' =>  $request->password,
         ];
@@ -37,9 +39,12 @@ class LoginController extends Controller
         {
             $response = $answer->json();
             session(['token' => $response["token"]]);
+            session(['user_id' => $response["user"]["_id"]]);
+            Redirect::to('index')->with('alert-success', 'Login realizado com sucesso');
+            return redirect('/');
         }
 
-        return redirect('/');
+        return back()->withErrors(['Erro ao realizar login, corrija seu email e/ou senha']);
     }
 
     function logout(){

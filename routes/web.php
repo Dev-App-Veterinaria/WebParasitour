@@ -51,12 +51,5 @@ Route::post('/login',[LoginController::class, 'login'])->name('usuario.login');
 Route::get('/logout',[LoginController::class, 'logout'])->name('usuario.logout');
 
 //Rotas de usuarios
-Route::get('/usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
-
-Route::get('/usuarios/create', [UsuariosController::class, 'create'])->name('usuarios.create');
-Route::post('/usuarios/create', [UsuariosController::class, 'store'])->name('usuarios.store');
-
-Route::get('/usuarios/{id}/edit', [UsuariosController::class, 'edit'])->name('usuarios.edit');
-Route::put('/usuarios/{id}/edit', [UsuariosController::class, 'update'])->name('usuarios.update');
-
-Route::get('/usuarios/{id}', [UsuariosController::class, 'destroy'])->name('usuarios.destroy');
+Route::get('/usuario', [UsuariosController::class, 'show'])->name('usuarios.show');
+Route::put('/usuario', [UsuariosController::class, 'update'])->name('usuarios.update');
