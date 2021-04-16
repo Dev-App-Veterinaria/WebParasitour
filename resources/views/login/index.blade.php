@@ -2,12 +2,6 @@
 @section('conteudo')
 
 <body>
-@if($errors->any())
-			<div class="alert alert-danger" style="margin: 0px;">
-				{{$errors->first()}}
-			</div>
-@endif
-
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -35,6 +29,13 @@
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
 					</div>
+					@if($errors->any())
+						<div class="alert alert-danger" style="margin: 0px;">
+							@foreach($errors->all() as $error)
+								  {{ $error }}
+							@endforeach
+						</div>
+					@endif
 					
 					<div class="container-login100-form-btn">
 						<button type="submit" class="login100-form-btn">
