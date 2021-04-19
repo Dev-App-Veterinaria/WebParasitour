@@ -12,7 +12,7 @@ class DoencaController extends Controller
 
     public function __construct()
     {
-        $this->server = 'http://localhost:3002/api/disease/';
+        $this->server = env("SERVER_ADDRESS").'disease/';
         $this->middleware('check.session');
     }
     /**
