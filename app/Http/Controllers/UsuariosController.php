@@ -11,7 +11,7 @@ class UsuariosController extends Controller
 
     public function __construct()
     {
-        $this->server = 'http://localhost:3002/api/user/';
+        $this->server = env("SERVER_ADDRESS").'user/';
         $this->middleware('check.session');
 
     }

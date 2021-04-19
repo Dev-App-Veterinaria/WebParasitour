@@ -11,7 +11,7 @@ class ArtigoController extends Controller
 
     public function __construct()
     {
-        $this->server = 'http://localhost:3002/api/article/';
+        $this->server = env("SERVER_ADDRESS").'article/';
         $this->middleware('check.session');
     }
     /**
