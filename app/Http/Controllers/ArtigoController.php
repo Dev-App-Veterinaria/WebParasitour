@@ -45,6 +45,7 @@ class ArtigoController extends Controller
      */
     public function store(Request $request)
     {
+        $token = session('token', '');
         $cadastro = [
             'name' => $request->input('nome'),
             'doi' => $request->input('doi'),
@@ -53,11 +54,16 @@ class ArtigoController extends Controller
             'state' => $request->input('estados'),
         ];
 
-        Http::post($this->server, $cadastro);
+        $doencas = Http::withHeaders([
+            'token' => "Bearer $token",
+        ])->post($this->server, $cadastro);
 
-        if($cadastro){
-            return redirect('/artigos');
+        $status = $doencas->status(); 
+        if($status == 401){
+            session()->forget('token');
         }
+
+        return redirect('/artigos');
     }
 
     /**
@@ -101,7 +107,8 @@ class ArtigoController extends Controller
             'state' => $request->input('estados'),
         ];
 
-        Http::put($this->server.$id, $artigo);
+        $token = session('token', '');
+        Http::withHeaders(['token'=>"Bearer $token"])->put($this->server.$id, $artigo);
 
         return redirect('/artigos');
     }
@@ -114,7 +121,8 @@ class ArtigoController extends Controller
      */
     public function destroy($id)
     {
-        Http::delete($this->server.$id);
+        $token = session('token', '');
+        Http::withHeaders(['token'=>"Bearer $token"])->delete($this->server . $id);
         return redirect('/artigos');
     }
 }

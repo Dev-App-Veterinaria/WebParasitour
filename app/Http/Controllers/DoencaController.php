@@ -118,7 +118,8 @@ class DoencaController extends Controller
             'states' =>  $request->estados,
         ];
 
-        Http::put($this->server.$id, $doencas);
+        $token = session('token', '');
+        Http::withHeaders(['token'=>"Bearer $token"])->put($this->server.$id, $doencas);
 
         return redirect('/doencas');
     }
@@ -131,7 +132,8 @@ class DoencaController extends Controller
      */
     public function destroy($id)
     {
-        Http::delete($this->server.$id);
+        $token = session('token', '');
+        Http::withHeaders(['token'=>"Bearer $token"])->delete($this->server . $id);
         return redirect('/doencas');
     }
 }
