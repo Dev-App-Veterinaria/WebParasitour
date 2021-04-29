@@ -1,8 +1,8 @@
 
-![Parasitour](https://i.imgur.com/PrCToZz.png)
+![Parasitour](https://i.imgur.com/NgbEmQy.png)
 # Bem vindo ao **Web Parasitour**!
 
-![web](https://i.imgur.com/NgbEmQy.png)
+![web](https://i.imgur.com/rXpGVER.png)
 
 > ### Detalhes do Sistema
 Este sistema WEB foi desenvolvido para que o administrador do aplicativo **Parasitour** possa gerenciar os dados e informações que serão exibidas no app. Neste sistema o usuário poderá cadastrar, editar e remover informações úteis a aplicação. Para acessar o repositório do aplicativo Parasitour e ter mais informações é só clicar na imagem abaixo!
