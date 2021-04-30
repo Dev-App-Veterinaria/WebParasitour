@@ -62,7 +62,7 @@
             @endif
             <div class="collapse navbar-collapse" id="navbarToggler">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    <?php 
+                    <?php
                         $classesDoencas= "nav-item";
                         $classesArtigos= "nav-item";
                         $classesUsuarios = "nav-item";
@@ -124,7 +124,7 @@
             <div class="row">
                 <div class="col-12 col-md-6 py-2">
                     <img src="/assets/favicon-light.png" alt="" width="40">
-                    <p class="d-inline-block ml-2">Créditos template: &copy; <a href="https://www.macodeid.com/" class="fg-white fw-medium">MACode ID</a>.</p>
+                    <p class="d-inline-block ml-2">Créditos template: &copy; <a href="https://www.macodeid.com/" class="fg-white fw-medium">MACode ID</a>. e <a href="https://www.brasilcode.com.br/30-formularios-de-login-html5-e-css3-gratuitos/" class="fg-white fw-medium">BrasilCode</a></p>
                 </div>
             </div>
         </div>
